@@ -1,4 +1,4 @@
-package com.longhb.do4life.ui.gallery;
+package com.longhb.do4life.ui.profile;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

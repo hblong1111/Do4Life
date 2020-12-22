@@ -1,4 +1,4 @@
-package com.longhb.do4life.ui.slideshow;
+package com.longhb.do4life.ui.schedule;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

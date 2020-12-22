@@ -12,14 +12,29 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.longhb.do4life.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:id="@+id/nav_profile"
+        android:name="com.longhb.do4life.ui.profile.GalleryFragment"
+        android:label="@string/menu_profile"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.longhb.do4life.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:id="@+id/nav_scheduleExam"
+        android:name="com.longhb.do4life.ui.schedule.SlideshowFragment"
+        android:label="@string/menu_scheduleExam"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_historyExam"
+        android:name="com.longhb.do4life.ui.history.HistoryFragment"
+        android:label="@string/menu_historyExam"
+        tools:layout="@layout/history_fragment" />
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.longhb.do4life.ui.about.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/about_fragment" />
+    <fragment
+        android:id="@+id/nav_policy"
+        android:name="com.longhb.do4life.ui.policy.PolicyFragment"
+        android:label="@string/menu_policy"
+        tools:layout="@layout/policy_fragment" />
 </navigation>
