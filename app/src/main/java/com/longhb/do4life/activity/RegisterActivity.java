@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 
@@ -36,13 +34,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         binding.btnSignIn.setOnClickListener(this);
         binding.tvBack.setOnClickListener(this);
 
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnSignIn:
-                signinAccount();
+                siginAccount();
                 break;
             case R.id.tvBack:
                 onBackPressed();
@@ -50,10 +49,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void signinAccount() {
+    private void siginAccount() {
+
+        //TODO: check các dữ liệu người dùng nhập(không đúng yêu cầu return;)
+
         String username = binding.edtPhone.getText().toString();
         String pass = binding.edtPassword.getText().toString();
         String passCF = binding.edtCfPassword.getText().toString();
+
 
         if (pass.equals(passCF)) {
             ProgressDialog dialog = new ProgressDialog(this);

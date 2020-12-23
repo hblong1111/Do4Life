@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         binding.btnLogin.setOnClickListener(this);
         binding.tvQuenMatKhau.setOnClickListener(this);
         binding.tvSignIn.setOnClickListener(this);
+
     }
 
     private void configRememberPassword() {
@@ -100,6 +101,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void checkLogin() {
+
+        //TODO: check các dữ liệu người dùng nhập(không đúng yêu cầu return;)
+
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Vui lòng đợi...");
         progressDialog.setTitle("Đang đăng nhập");
