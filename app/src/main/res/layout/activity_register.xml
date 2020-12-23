@@ -28,7 +28,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <ImageView
@@ -37,26 +37,6 @@
                 android:layout_height="120dp"
                 android:layout_marginBottom="20dp"
                 android:src="@drawable/logo_splash" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:textColorHint="#bdbdbd"
-                app:boxBackgroundMode="outline"
-                app:hintTextAppearance="@style/MyHintStyle">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtFullname"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#bdbdbd"
-                    android:hint="Họ và tên"
-                    android:inputType="textCapWords"
-                    android:textColor="#000"
-                    android:textColorHint="#bdbdbd"
-                    android:textCursorDrawable="@null" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -115,67 +95,6 @@
                     android:backgroundTint="#bdbdbd"
                     android:hint="Xác nhận mật khẩu"
                     android:inputType="textPassword"
-                    android:textColor="#000"
-                    android:textColorHint="#bdbdbd"
-                    android:textCursorDrawable="@null" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:textColorHint="#bdbdbd"
-                app:boxBackgroundMode="outline"
-                app:hintTextAppearance="@style/MyHintStyle">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtAddess"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#bdbdbd"
-                    android:hint="Địa chỉ"
-                    android:inputType="textPostalAddress"
-                    android:textColor="#000"
-                    android:textColorHint="#bdbdbd"
-                    android:textCursorDrawable="@null" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:textColorHint="#bdbdbd"
-                app:boxBackgroundMode="outline"
-                app:hintTextAppearance="@style/MyHintStyle">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtCMND"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#bdbdbd"
-                    android:hint="Nhập CMND/CCCD"
-                    android:inputType="number"
-                    android:textColor="#000"
-                    android:textColorHint="#bdbdbd"
-                    android:textCursorDrawable="@null" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:textColorHint="#bdbdbd"
-                app:boxBackgroundMode="outline"
-                app:hintTextAppearance="@style/MyHintStyle">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtNewBirhday"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#bdbdbd"
-                    android:hint="Chọn năm sinh"
-                    android:onClick="onPickDate"
-                    android:singleLine="true"
                     android:textColor="#000"
                     android:textColorHint="#bdbdbd"
                     android:textCursorDrawable="@null" />
