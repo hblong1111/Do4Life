@@ -31,7 +31,7 @@ public class TestViewModelActivity extends AppCompatActivity implements CheckLog
     }
 
     @Override
-    public void onLoginSuccess() {
+    public void onLoginSuccess(String idAcc) {
         Toast.makeText(this, "Dang nhap thanh cong", Toast.LENGTH_SHORT).show();
     }
 

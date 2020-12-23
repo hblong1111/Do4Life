@@ -19,7 +19,7 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void onResponse(Call<List<MyAccount>> call, Response<List<MyAccount>> response) {
                 if (response.isSuccessful() && response.body().size() != 0) {
-                    callback.onLoginSuccess();
+                    callback.onLoginSuccess(response.body().get(0).id);
                     return;
                 }
 
