@@ -10,7 +10,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignInViewModel extends ViewModel {
+public class RegisterViewModel extends ViewModel {
 
     public void createAccount(String username, String pass, CheckCreateAccountEvent callback) {
         RetrofitModule.getInstance().createAccount(new User(username, pass)).enqueue(new Callback<Boolean>() {

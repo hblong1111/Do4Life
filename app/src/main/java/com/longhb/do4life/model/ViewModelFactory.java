@@ -6,14 +6,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.longhb.do4life.viewmodel.HomeViewModel;
 import com.longhb.do4life.viewmodel.LoginViewModel;
-import com.longhb.do4life.viewmodel.SignInViewModel;
+import com.longhb.do4life.viewmodel.RegisterViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(SignInViewModel.class)) {
-            return (T) new SignInViewModel();
+        if (modelClass.isAssignableFrom(RegisterViewModel.class)) {
+            return (T) new RegisterViewModel();
         } else if (modelClass.isAssignableFrom(HomeViewModel.class)) {
             return (T) new HomeViewModel();
         }else if (modelClass.isAssignableFrom(LoginViewModel.class)) {

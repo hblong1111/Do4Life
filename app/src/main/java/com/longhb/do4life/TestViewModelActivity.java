@@ -1,20 +1,14 @@
 package com.longhb.do4life;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.longhb.do4life.R;
-import com.longhb.do4life.model.MyAccount;
 import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.utils.CheckLoginEvent;
-import com.longhb.do4life.viewmodel.HomeViewModel;
 import com.longhb.do4life.viewmodel.LoginViewModel;
-import com.longhb.do4life.viewmodel.SignInViewModel;
 
 public class TestViewModelActivity extends AppCompatActivity implements CheckLoginEvent {
 

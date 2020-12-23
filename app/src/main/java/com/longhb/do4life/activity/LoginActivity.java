@@ -101,7 +101,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void checkLogin() {
         ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Đang đăng nhập...");
+        progressDialog.setMessage("Vui lòng đợi...");
+        progressDialog.setTitle("Đang đăng nhập");
         progressDialog.show();
         String username = binding.edtPhone.getText().toString();
         String pass = binding.edtPass.getText().toString();
