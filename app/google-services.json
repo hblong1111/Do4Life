@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "148274772370",
+    "project_id": "do4life",
+    "storage_bucket": "do4life.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148274772370:android:cc5dbdb658ee07e645694b",
+        "android_client_info": {
+          "package_name": "com.longhb.do4life"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148274772370-q8327kt74miifi1sbb1kuvek59qu3vf2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.longhb.do4life",
+            "certificate_hash": "21d28e43c3f6450411c8715743805d7d99c94443"
+          }
+        },
+        {
+          "client_id": "148274772370-91fl1f7p6eseubfo2u5lphs83pcn8jrf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3YT-gpxqDHL8XjjCllC7OUbKqBptBVwQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "148274772370-91fl1f7p6eseubfo2u5lphs83pcn8jrf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

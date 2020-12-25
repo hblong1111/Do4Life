@@ -1,6 +1,7 @@
 package com.longhb.do4life.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -15,6 +16,8 @@ import android.widget.ImageView;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.databinding.ActivityConfirmAccountBinding;
+import com.longhb.do4life.model.ViewModelFactory;
+import com.longhb.do4life.viewmodel.ConfirmAccountViewModel;
 
 import java.io.ByteArrayOutputStream;
 import java.util.UUID;
@@ -24,11 +27,16 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
     private static final int CODE_IMAGE_CMNDT = 2;
     ActivityConfirmAccountBinding binding;
 
+    Bitmap bitmap;
+    ConfirmAccountViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityConfirmAccountBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+        viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(ConfirmAccountViewModel.class);
 
         binding.imageCMNDS.setOnClickListener(this);
         binding.imageCMNDT.setOnClickListener(this);
@@ -45,8 +53,13 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
                 getImageCMND(CODE_IMAGE_CMNDT);
                 break;
             case R.id.btnSave:
+                getUrl();
                 break;
         }
+    }
+
+    private void getUrl() {
+        viewModel.uploadImage(bitmap);
     }
 
     private void getImageCMND(int codeRequestImage) {
@@ -58,22 +71,13 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Bitmap photo = (Bitmap) data.getExtras().get("data");
-        Uri uri = getImageUri(getApplicationContext(), photo);
-        if (uri == null) return;
+        bitmap = (Bitmap) data.getExtras().get("data");
+        if (bitmap == null) return;
         if (requestCode == CODE_IMAGE_CMNDS) {
-            binding.imageCMNDS.setImageURI(uri);
+            binding.imageCMNDS.setImageBitmap(bitmap);
         } else {
-            binding.imageCMNDT.setImageURI(uri);
+            binding.imageCMNDT.setImageBitmap(bitmap);
         }
-        Log.d("longhbb", "ConfirmAccountActivity | onActivityResult: " +
-                getImageUri(getApplicationContext(), photo));
     }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, UUID.randomUUID().toString() + ".png", "drawing");
-        return Uri.parse(path);
-    }
 }
