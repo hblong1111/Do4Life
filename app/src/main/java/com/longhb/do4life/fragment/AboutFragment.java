@@ -1,6 +1,4 @@
-package com.longhb.do4life.ui.about;
-
-import androidx.lifecycle.ViewModelProvider;
+package com.longhb.do4life.fragment;
 
 import android.os.Bundle;
 
@@ -16,8 +14,6 @@ import com.longhb.do4life.R;
 
 public class AboutFragment extends Fragment {
 
-    private AboutViewModel mViewModel;
-
     public static AboutFragment newInstance() {
         return new AboutFragment();
     }
@@ -27,12 +23,4 @@ public class AboutFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.about_fragment, container, false);
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(AboutViewModel.class);
-        // TODO: Use the ViewModel
-    }
-
 }

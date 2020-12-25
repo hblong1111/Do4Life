@@ -1,6 +1,4 @@
-package com.longhb.do4life.ui.history;
-
-import androidx.lifecycle.ViewModelProvider;
+package com.longhb.do4life.fragment;
 
 import android.os.Bundle;
 
@@ -16,8 +14,6 @@ import com.longhb.do4life.R;
 
 public class HistoryFragment extends Fragment {
 
-    private HistoryViewModel mViewModel;
-
     public static HistoryFragment newInstance() {
         return new HistoryFragment();
     }
@@ -27,12 +23,4 @@ public class HistoryFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.history_fragment, container, false);
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
-        // TODO: Use the ViewModel
-    }
-
 }

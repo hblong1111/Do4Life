@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class JsonProfile {
 
-
     @SerializedName("_id")
     @Expose
     public String id;
@@ -29,7 +28,6 @@ public class JsonProfile {
     }
 
     public JsonProfile(String id, String username, String password, Boolean checked, Boolean status, Integer v) {
-        super();
         this.id = id;
         this.username = username;
         this.password = password;

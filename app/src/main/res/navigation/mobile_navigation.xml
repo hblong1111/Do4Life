@@ -7,34 +7,34 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.longhb.do4life.ui.home.HomeFragment"
+        android:name="com.longhb.do4life.fragment.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.longhb.do4life.ui.profile.GalleryFragment"
+        android:name="com.longhb.do4life.fragment.ProfileFragment"
         android:label="@string/menu_profile"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_scheduleExam"
-        android:name="com.longhb.do4life.ui.schedule.SlideshowFragment"
+        android:name="com.longhb.do4life.fragment.ExamScheduleFragment"
         android:label="@string/menu_scheduleExam"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_exam_schedule" />
     <fragment
         android:id="@+id/nav_historyExam"
-        android:name="com.longhb.do4life.ui.history.HistoryFragment"
+        android:name="com.longhb.do4life.fragment.HistoryFragment"
         android:label="@string/menu_historyExam"
         tools:layout="@layout/history_fragment" />
     <fragment
         android:id="@+id/nav_about"
-        android:name="com.longhb.do4life.ui.about.AboutFragment"
+        android:name="com.longhb.do4life.fragment.AboutFragment"
         android:label="@string/menu_about"
         tools:layout="@layout/about_fragment" />
     <fragment
         android:id="@+id/nav_policy"
-        android:name="com.longhb.do4life.ui.policy.PolicyFragment"
+        android:name="com.longhb.do4life.fragment.PolicyFragment"
         android:label="@string/menu_policy"
         tools:layout="@layout/policy_fragment" />
 </navigation>
