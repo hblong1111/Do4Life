@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class JsonProfile {
 
-
     @SerializedName("_id")
     @Expose
     public String id;

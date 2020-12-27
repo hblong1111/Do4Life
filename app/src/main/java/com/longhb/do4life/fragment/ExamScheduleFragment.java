@@ -43,6 +43,7 @@ public class ExamScheduleFragment extends Fragment{
         arrayExam.add(new Exam("10","Bui Hung 6","06/10/2020"));
         arrayExam.add(new Exam("11","Bui Hung 6","06/10/2020"));
         arrayExam.add(new Exam("12","Bui Hung 6","06/10/2020"));
+
         examAdapter=new ExamScheduleAdapter(arrayExam, getContext());
         LinearLayoutManager linearLayout=new LinearLayoutManager(getContext());
         rcv_Exam.setAdapter(examAdapter);
