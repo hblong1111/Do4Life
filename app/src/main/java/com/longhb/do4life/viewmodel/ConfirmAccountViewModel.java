@@ -15,8 +15,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.longhb.do4life.model.JsonProfile;
+import com.longhb.do4life.network.RetrofitModule;
 
 import java.io.ByteArrayOutputStream;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ConfirmAccountViewModel extends ViewModel {
     private FirebaseStorage storage;
@@ -27,9 +33,24 @@ public class ConfirmAccountViewModel extends ViewModel {
         storageRef = storage.getReference();
     }
 
-    public void uploadImage(Bitmap bitmap) {
-        // Create a storage reference from our app
 
+    public void updateAccount(JsonProfile jsonProfile, UpdateAccountEvent callback) {
+        RetrofitModule.getInstance().updateAccount(jsonProfile).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.isSuccessful()){
+                    callback.onUpdateSuccess();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                callback.onUpdateError();
+            }
+        });
+    }
+
+    public void uploadImage(Bitmap bitmap,UploadImageEvent callback) {
         String name="image"+System.currentTimeMillis()+".jpg";
         StorageReference mountainsRef = storageRef.child(name);
 
@@ -55,28 +76,32 @@ public class ConfirmAccountViewModel extends ViewModel {
         });
 
 
-        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
-                }
+         uploadTask.continueWithTask(task -> {
+             if (!task.isSuccessful()) {
+                 throw task.getException();
+             }
 
-                // Continue with the task to get the download URL
-                return mountainsRef.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    Uri downloadUri = task.getResult();
-                    Log.d("longhbb", "ConfirmAccountViewModel | onComplete: "+downloadUri.toString());
-                } else {
-                    // Handle failures
-                    // ...
-                    Log.d("longhbb", "ConfirmAccountViewModel | onComplete: khong lay duoc link anh");
-                }
-            }
-        });
+             // Continue with the task to get the download URL
+             return mountainsRef.getDownloadUrl();
+         }).addOnCompleteListener(task -> {
+             if (task.isSuccessful()) {
+                 Uri downloadUri = task.getResult();
+                 Log.d("longhbb", "ConfirmAccountViewModel | onComplete: "+downloadUri.toString());
+                 callback.onUploadSuccess(downloadUri.toString());
+             } else {
+
+             }
+         });
+
     }
+
+
+  public   interface UpdateAccountEvent {
+        void onUpdateSuccess();
+        void onUpdateError();
+    }
+   public interface UploadImageEvent {
+        void onUploadSuccess(String url);
+    }
+
 }

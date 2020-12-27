@@ -14,7 +14,7 @@ import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.utils.CheckCreateAccountEvent;
 import com.longhb.do4life.viewmodel.RegisterViewModel;
 
-import static com.longhb.do4life.utils.Conts.showDialogAlert;
+import static com.longhb.do4life.utils.Common.showDialogAlert;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 

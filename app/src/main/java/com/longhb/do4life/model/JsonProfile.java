@@ -5,35 +5,50 @@ import com.google.gson.annotations.SerializedName;
 
 public class JsonProfile {
 
+
     @SerializedName("_id")
     @Expose
     public String id;
-    @SerializedName("username")
+    @SerializedName("CMND")
     @Expose
-    public String username;
-    @SerializedName("password")
+    public String cMND;
+    @SerializedName("fontCMND")
     @Expose
-    public String password;
+    public String fontCMND;
+    @SerializedName("backCMND")
+    @Expose
+    public String backCMND;
     @SerializedName("checked")
     @Expose
     public Boolean checked;
     @SerializedName("status")
     @Expose
     public Boolean status;
-    @SerializedName("__v")
-    @Expose
-    public Integer v;
 
+    /**
+     * No args constructor for use in serialization
+     *
+     */
     public JsonProfile() {
     }
 
-    public JsonProfile(String id, String username, String password, Boolean checked, Boolean status, Integer v) {
+    /**
+     *
+     * @param backCMND
+     * @param checked
+     * @param id
+     * @param fontCMND
+     * @param cMND
+     * @param status
+     */
+    public JsonProfile(String id, String cMND, String fontCMND, String backCMND, Boolean checked, Boolean status) {
+        super();
         this.id = id;
-        this.username = username;
-        this.password = password;
+        this.cMND = cMND;
+        this.fontCMND = fontCMND;
+        this.backCMND = backCMND;
         this.checked = checked;
         this.status = status;
-        this.v = v;
     }
 
 }

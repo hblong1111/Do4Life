@@ -1,10 +1,11 @@
 package com.longhb.do4life.utils;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
-public class Conts {
+public class Common {
     public static final String BASE_URL = "https://dofolife.herokuapp.com";
     public static final String MY_PREFS_NAME = "data";
     public static final String KEY_PREFS_USERNAME = "username";
@@ -18,6 +19,13 @@ public class Conts {
         builder.setNegativeButton(textBtn, callback);
         builder.create();
         return builder.show();
+    }
+
+    public static ProgressDialog buildDialogLoading(Context context, String title, CharSequence mess){
+        ProgressDialog  dialog=new ProgressDialog(context);
+        dialog.setTitle(title);
+        dialog.setMessage(mess);
+        return dialog;
     }
 
 }

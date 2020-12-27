@@ -2,7 +2,6 @@ package com.longhb.do4life.viewmodel;
 
 import com.longhb.do4life.model.JsonProfile;
 import com.longhb.do4life.network.RetrofitModule;
-import com.longhb.do4life.utils.UpdateAccountEvent;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,5 +22,10 @@ public class UpdateAccountViewModel {
                 callback.onUpdateError();
             }
         });
+    }
+
+      public interface UpdateAccountEvent {
+        void onUpdateSuccess();
+        void onUpdateError();
     }
 }
