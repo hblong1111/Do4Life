@@ -1,5 +1,6 @@
 package com.longhb.do4life.activity;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -7,6 +8,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     LoginViewModel viewModel;
     private AlertDialog alertDialog;
 
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     private void configRememberPassword() {
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String username = prefs.getString(KEY_PREFS_USERNAME, null);
@@ -86,13 +90,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.tvQuenMatKhau:
                 //todo: chuyển màn hình qyên mật khẩu
-                Toast.makeText(this, "Chuyển sang màn hình quên mật khẩu", Toast.LENGTH_SHORT).show();
+                ResetPass();
                 break;
         }
     }
 
     private void signInAccount() {
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intent);
+    }
+    private void ResetPass(){
+        Intent intent = new Intent(LoginActivity.this, ResetPassActivity.class);
         startActivity(intent);
     }
 
