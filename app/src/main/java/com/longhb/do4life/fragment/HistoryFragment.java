@@ -26,29 +26,27 @@ public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.history_fragment, container, false);
-        rcv_history=view.findViewById(R.id.rcv_History);
-
+        View root=inflater.inflate(R.layout.history_fragment, container, false);
+        rcv_history=root.findViewById(R.id.rcv_History);
         ShowDataHis();
-        return  view;
-
+        return  root;
     }
     private  void ShowDataHis(){
-        ArrayList<HistoryExam> hisList=new ArrayList<>();
-        hisList.add(new HistoryExam("1", "U bướu", "25/09/2020"));
-        hisList.add(new HistoryExam("2", "U bướu 1", "25/10/2020"));
-        hisList.add(new HistoryExam("3", "U bướu 2", "15/10/2020"));
-        hisList.add(new HistoryExam("4", "U bướu 3", "26/10/2020"));
-        hisList.add(new HistoryExam("5", "U bướu 4", "25/09/2020"));
-        hisList.add(new HistoryExam("6", "U bướu 5", "25/09/2020"));
-        hisList.add(new HistoryExam("7", "U bướu 6", "25/09/2020"));
-        hisList.add(new HistoryExam("8", "U bướu 7", "25/09/2020"));
-        hisList.add(new HistoryExam("9", "U bướu 8", "25/09/2020"));
-        hisList.add(new HistoryExam("10", "U bướu f", "25/09/2020"));
-        hisList.add(new HistoryExam("11", "U bướu a", "25/09/2020"));
-        hisList.add(new HistoryExam("12", "U bướu f", "25/09/2020"));
+        ArrayList<HistoryExam> historyList=new ArrayList<>();
+        historyList.add(new HistoryExam("1", "U bướu", "25/09/2020"));
+        historyList.add(new HistoryExam("2", "U bướu 1", "25/10/2020"));
+        historyList.add(new HistoryExam("3", "U bướu 2", "15/10/2020"));
+        historyList.add(new HistoryExam("4", "U bướu 3", "26/10/2020"));
+        historyList.add(new HistoryExam("5", "U bướu 4", "25/09/2020"));
+        historyList.add(new HistoryExam("6", "U bướu 5", "25/09/2020"));
+        historyList.add(new HistoryExam("7", "U bướu 6", "25/09/2020"));
+        historyList.add(new HistoryExam("8", "U bướu 7", "25/09/2020"));
+        historyList.add(new HistoryExam("9", "U bướu 8", "25/09/2020"));
+        historyList.add(new HistoryExam("10", "U bướu f", "25/09/2020"));
+        historyList.add(new HistoryExam("11", "U bướu a", "25/09/2020"));
+        historyList.add(new HistoryExam("12", "U bướu f", "25/09/2020"));
 
-        historyAdapter=new HistoryAdapter(hisList, getContext());
+        historyAdapter=new HistoryAdapter(historyList, getContext());
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
         rcv_history.setAdapter(historyAdapter);
         rcv_history.setLayoutManager(layoutManager);

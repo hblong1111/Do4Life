@@ -10,16 +10,15 @@ public class HistoryExam {
     @SerializedName("Name_Exam")
     @Expose
     public String name_Exam;
-    @SerializedName("Day_Exam")
+    @SerializedName("Day_History")
     @Expose
-    public String day_Exam;
+    public String day_history;
 
-    public HistoryExam(String STT_history, String name_Exam, String day_Exam) {
+    public HistoryExam(String STT_history, String name_Exam, String day_history) {
         this.STT_history = STT_history;
         this.name_Exam = name_Exam;
-        this.day_Exam = day_Exam;
+        this.day_history = day_history;
     }
-
     public HistoryExam() {
     }
 }

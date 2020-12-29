@@ -35,23 +35,21 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.Recycler
     public void onBindViewHolder(@NonNull HistoryAdapter.RecyclerViewHolder holder, int position) {
         holder.tv_STT_his.setText(historyList.get(position).STT_history);
         holder.tv_Name_Exam.setText(historyList.get(position).name_Exam);
-        holder.tv_Day_Exam.setText(historyList.get(position).day_Exam);
+        holder.tv_Day_Exam.setText(historyList.get(position).day_history);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return historyList.size();
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView tv_STT_his, tv_Name_Exam, tv_Day_Exam;
-        ImageButton btn_delete;
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_STT_his=itemView.findViewById(R.id.tv_stt_history);
             tv_Name_Exam=itemView.findViewById(R.id.tv_faculty_history);
             tv_Day_Exam=itemView.findViewById(R.id.tv_day_history);
-            btn_delete=itemView.findViewById(R.id.delete_his);
         }
     }
 }
