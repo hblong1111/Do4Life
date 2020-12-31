@@ -19,6 +19,7 @@ import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.model.retrofit.JsonCheckLogin;
 import com.longhb.do4life.utils.CheckLoginEvent;
 import com.longhb.do4life.utils.Common;
+import com.longhb.do4life.utils.PreferencesUtils;
 import com.longhb.do4life.viewmodel.LoginViewModel;
 
 import static com.longhb.do4life.utils.Common.KEY_PREFS_PASSWORD;
@@ -29,8 +30,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ActivityLoginBinding binding;
     LoginViewModel viewModel;
     private AlertDialog alertDialog;
+    private PreferencesUtils prefs;
 
-    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +49,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     private void configRememberPassword() {
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+          prefs = PreferencesUtils.getInstance(this);
         String username = prefs.getString(KEY_PREFS_USERNAME, null);
         String password = prefs.getString(Common.KEY_PREFS_PASSWORD, null);
         if (username != null) {
@@ -60,16 +60,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         binding.ckbSavePass.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
             if (isChecked) {
-                editor.putString(KEY_PREFS_USERNAME, binding.edtPhone.getText().toString());
-                editor.putString(KEY_PREFS_PASSWORD, binding.edtPass.getText().toString());
+                prefs.setString(KEY_PREFS_USERNAME, binding.edtPhone.getText().toString());
+                prefs.setString(KEY_PREFS_PASSWORD, binding.edtPass.getText().toString());
             } else {
 
-                editor.putString(KEY_PREFS_USERNAME, null);
-                editor.putString(KEY_PREFS_PASSWORD, null);
+                prefs.setString(KEY_PREFS_USERNAME, null);
+                prefs.setString(KEY_PREFS_PASSWORD, null);
             }
-            editor.apply();
         });
     }
 
@@ -120,9 +118,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onLoginSuccess(String idAcc) {
                 progressDialog.dismiss();
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                intent.putExtra(Common.CODE_PUT_ID_ACCOUNT, idAcc);
-                startActivity(intent);
+                prefs.setString(Common.KEY_ID_ACC,idAcc);
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 finish();
             }
 
