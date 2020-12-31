@@ -1,36 +1,32 @@
 package com.longhb.do4life.activity;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.databinding.ActivityLoginBinding;
+import com.longhb.do4life.model.MyAccount;
 import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.model.retrofit.JsonCheckLogin;
 import com.longhb.do4life.utils.CheckLoginEvent;
 import com.longhb.do4life.utils.Common;
-import com.longhb.do4life.utils.PreferencesUtils;
+import com.longhb.do4life.utils.SharedUtils;
 import com.longhb.do4life.viewmodel.LoginViewModel;
 
 import static com.longhb.do4life.utils.Common.KEY_PREFS_PASSWORD;
 import static com.longhb.do4life.utils.Common.KEY_PREFS_USERNAME;
-import static com.longhb.do4life.utils.Common.MY_PREFS_NAME;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     ActivityLoginBinding binding;
     LoginViewModel viewModel;
     private AlertDialog alertDialog;
-    private PreferencesUtils prefs;
+    private SharedUtils prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void configRememberPassword() {
-          prefs = PreferencesUtils.getInstance(this);
+          prefs = SharedUtils.getInstance(this);
         String username = prefs.getString(KEY_PREFS_USERNAME, null);
         String password = prefs.getString(Common.KEY_PREFS_PASSWORD, null);
         if (username != null) {
@@ -116,9 +112,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String pass = binding.edtPass.getText().toString();
         viewModel.checkLogin(new JsonCheckLogin(username, pass), new CheckLoginEvent() {
             @Override
-            public void onLoginSuccess(String idAcc) {
+            public void onLoginSuccess(MyAccount myAccount) {
                 progressDialog.dismiss();
-                prefs.setString(Common.KEY_ID_ACC,idAcc);
+                prefs.setString(Common.KEY_ID_ACC,myAccount.id);
+                prefs.setBoolean(Common.KEY_CHECKED_ACC,myAccount.checked);
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 finish();
             }

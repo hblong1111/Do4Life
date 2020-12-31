@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.longhb.do4life.model.MyAccount;
 import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.utils.CheckLoginEvent;
 import com.longhb.do4life.viewmodel.LoginViewModel;
@@ -24,7 +25,7 @@ public class TestViewModelActivity extends AppCompatActivity implements CheckLog
     }
 
     @Override
-    public void onLoginSuccess(String idAcc) {
+    public void onLoginSuccess(MyAccount myAccount) {
         Toast.makeText(this, "Dang nhap thanh cong", Toast.LENGTH_SHORT).show();
     }
 

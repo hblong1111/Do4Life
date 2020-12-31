@@ -12,6 +12,7 @@ public class Common {
     public static final String KEY_PREFS_PASSWORD = "pass";
     public static final String CODE_PUT_ID_ACCOUNT = "id_acc";
     public static final String KEY_ID_ACC = "KEY_ID_ACC";
+    public static final String KEY_CHECKED_ACC = "KEY_CHECKED_ACC";
 
     public static AlertDialog showDialogAlert(Context context, String mess, String textBtn, DialogInterface.OnClickListener callback) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

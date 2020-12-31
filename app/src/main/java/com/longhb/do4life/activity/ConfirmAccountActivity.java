@@ -5,21 +5,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.databinding.ActivityConfirmAccountBinding;
 import com.longhb.do4life.model.JsonProfile;
 import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.utils.Common;
+import com.longhb.do4life.utils.SharedUtils;
 import com.longhb.do4life.viewmodel.ConfirmAccountViewModel;
-import com.longhb.do4life.viewmodel.UpdateAccountViewModel;
 
 public class ConfirmAccountActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int CODE_IMAGE_CMNDS = 1;
@@ -80,13 +77,10 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
                                 "cancel",
                                 (dialoga, which) -> alertDialog.dismiss());
                     } else {
-                        //fixme: lấy id và số cmnd của người dùng
-                        JsonProfile jsonProfile = new JsonProfile("5fdb822b7361b200177b71b7",
-                                "2eweqrffasasda",
+                        String id = SharedUtils.getInstance(this).getString(Common.KEY_ID_ACC, null);
+                        JsonProfile jsonProfile = new JsonProfile(id,
                                 urlT[0],
-                                urlS[0],
-                                true,
-                                true);
+                                urlS[0] );
                         viewModel.updateAccount(jsonProfile, new ConfirmAccountViewModel.UpdateAccountEvent() {
                             @Override
                             public void onUpdateSuccess() {
@@ -94,7 +88,10 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
                                 alertDialog = Common.showDialogAlert(ConfirmAccountActivity.this,
                                         "Đã gửi yêu cầu xác nhận!",
                                         "ok",
-                                        (dialog, which) -> alertDialog.dismiss());
+                                        (dialog, which) -> {
+                                            alertDialog.dismiss();
+                                            onBackPressed();
+                                        });
                             }
 
                             @Override

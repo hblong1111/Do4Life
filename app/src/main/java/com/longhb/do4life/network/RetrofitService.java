@@ -20,7 +20,7 @@ public interface RetrofitService {
 
     @POST("/getAccount")
         Call<MyAccount> checkLogin(@Body JsonCheckLogin user);
-    @POST("/updateAccount")
+    @POST("/updateCMNDAccount")
     Call<Boolean> updateAccount(@Body JsonProfile jsonProfile);
 
     @GET("/getAllPost")

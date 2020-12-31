@@ -1,15 +1,11 @@
 package com.longhb.do4life.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 
 import com.google.android.material.navigation.NavigationView;
 import com.longhb.do4life.R;
-import com.longhb.do4life.utils.Common;
-import com.longhb.do4life.utils.PreferencesUtils;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
