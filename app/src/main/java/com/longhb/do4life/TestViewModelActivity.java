@@ -21,7 +21,6 @@ public class TestViewModelActivity extends AppCompatActivity implements CheckLog
 
         viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(LoginViewModel.class);
 
-        viewModel.checkLogin("Long", "123",this);
     }
 
     @Override

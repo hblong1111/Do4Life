@@ -3,7 +3,8 @@ package com.longhb.do4life.viewmodel;
 import androidx.lifecycle.ViewModel;
 
 import com.longhb.do4life.model.MyAccount;
-import com.longhb.do4life.model.User;
+import com.longhb.do4life.model.retrofit.JsonCheckLogin;
+import com.longhb.do4life.model.retrofit.JsonCreateAccount;
 import com.longhb.do4life.network.RetrofitModule;
 import com.longhb.do4life.utils.CheckLoginEvent;
 
@@ -14,13 +15,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
-    public void checkLogin(String username, String password, CheckLoginEvent callback) {
+    public void checkLogin(JsonCheckLogin  jsonCheckLogin, CheckLoginEvent callback) {
         //todo: fix User
-        RetrofitModule.getInstance().checkLogin(new User(username, password,"")).enqueue(new Callback<List<MyAccount>>() {
+        RetrofitModule.getInstance().checkLogin(jsonCheckLogin).enqueue(new Callback<MyAccount>() {
             @Override
-            public void onResponse(Call<List<MyAccount>> call, Response<List<MyAccount>> response) {
-                if (response.isSuccessful() && response.body().size() != 0) {
-                    callback.onLoginSuccess(response.body().get(0).id);
+            public void onResponse(Call<MyAccount> call, Response<MyAccount> response) {
+                if (response.isSuccessful() && response.body().id!=null) {
+                    callback.onLoginSuccess(response.body().id);
                     return;
                 }
 
@@ -28,7 +29,7 @@ public class LoginViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<MyAccount>> call, Throwable t) {
+            public void onFailure(Call<MyAccount> call, Throwable t) {
                 callback.onLoginError();
             }
         });

@@ -1,9 +1,9 @@
-package com.longhb.do4life.model;
+package com.longhb.do4life.model.retrofit;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+public class JsonCheckLogin {
 
 
     @SerializedName("username")
@@ -12,27 +12,20 @@ public class User {
     @SerializedName("password")
     @Expose
     public String password;
-    @SerializedName("CMND")
-    @Expose
-    public String cMND;
 
     /**
      * No args constructor for use in serialization
-     *
      */
-    public User() {
+    public JsonCheckLogin() {
     }
 
     /**
-     *
      * @param password
-     * @param cMND
      * @param username
      */
-    public User(String username, String password, String cMND) {
+    public JsonCheckLogin(String username, String password) {
         super();
         this.username = username;
         this.password = password;
-        this.cMND = cMND;
     }
 }

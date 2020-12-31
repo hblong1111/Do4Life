@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.longhb.do4life.R;
 import com.longhb.do4life.databinding.ActivityLoginBinding;
 import com.longhb.do4life.model.ViewModelFactory;
+import com.longhb.do4life.model.retrofit.JsonCheckLogin;
 import com.longhb.do4life.utils.CheckLoginEvent;
 import com.longhb.do4life.utils.Common;
 import com.longhb.do4life.viewmodel.LoginViewModel;
@@ -99,7 +100,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
     }
-    private void ResetPass(){
+
+    private void ResetPass() {
         Intent intent = new Intent(LoginActivity.this, ResetPassActivity.class);
         startActivity(intent);
     }
@@ -114,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.show();
         String username = binding.edtPhone.getText().toString();
         String pass = binding.edtPass.getText().toString();
-        viewModel.checkLogin(username, pass, new CheckLoginEvent() {
+        viewModel.checkLogin(new JsonCheckLogin(username, pass), new CheckLoginEvent() {
             @Override
             public void onLoginSuccess(String idAcc) {
                 progressDialog.dismiss();
