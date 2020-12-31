@@ -24,8 +24,8 @@ public class PreferencesUtils {
         return INSTANCE;
     }
 
-    public String getString(String key, String value) {
-        return sharedPreferences.getString(key, value);
+    public String getString(String key, String valueDefault) {
+        return sharedPreferences.getString(key, valueDefault);
     }
     public void setString(String key, String value) {
         editor.putString(key, value);

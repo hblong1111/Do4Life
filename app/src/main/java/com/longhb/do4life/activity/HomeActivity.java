@@ -7,6 +7,7 @@ import android.view.Menu;
 import com.google.android.material.navigation.NavigationView;
 import com.longhb.do4life.R;
 import com.longhb.do4life.utils.Common;
+import com.longhb.do4life.utils.PreferencesUtils;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
@@ -18,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class HomeActivity extends AppCompatActivity {
-    private String idAccount;
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -26,11 +26,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-
-        idAccount = getIntent().getStringExtra(Common.CODE_PUT_ID_ACCOUNT);
-
-        Log.d("longhbb", "HomeActivity | onCreate: "+idAccount);
         
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,7 +54,5 @@ public class HomeActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-    private void DialogConfirm(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-    }
+
 }
