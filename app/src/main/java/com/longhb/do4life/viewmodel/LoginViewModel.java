@@ -15,7 +15,8 @@ import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
     public void checkLogin(String username, String password, CheckLoginEvent callback) {
-        RetrofitModule.getInstance().checkLogin(new User(username, password)).enqueue(new Callback<List<MyAccount>>() {
+        //todo: fix User
+        RetrofitModule.getInstance().checkLogin(new User(username, password,"")).enqueue(new Callback<List<MyAccount>>() {
             @Override
             public void onResponse(Call<List<MyAccount>> call, Response<List<MyAccount>> response) {
                 if (response.isSuccessful() && response.body().size() != 0) {

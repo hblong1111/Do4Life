@@ -12,8 +12,8 @@ import retrofit2.Response;
 
 public class RegisterViewModel extends ViewModel {
 
-    public void createAccount(String username, String pass, CheckCreateAccountEvent callback) {
-        RetrofitModule.getInstance().createAccount(new User(username, pass)).enqueue(new Callback<Boolean>() {
+    public void createAccount(User user, CheckCreateAccountEvent callback) {
+        RetrofitModule.getInstance().createAccount(user).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.isSuccessful()) {

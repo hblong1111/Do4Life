@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.databinding.ActivityRegisterBinding;
+import com.longhb.do4life.model.User;
 import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.utils.CheckCreateAccountEvent;
 import com.longhb.do4life.viewmodel.RegisterViewModel;
@@ -57,13 +58,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String pass = binding.edtPassword.getText().toString();
         String passCF = binding.edtCfPassword.getText().toString();
 
+        String cmnd = binding.edtCMND.getText().toString();
 
         if (pass.equals(passCF)) {
             ProgressDialog dialog = new ProgressDialog(this);
             dialog.setMessage("Vui lòng đợi...");
             dialog.setTitle("Tạo tài khoản");
             dialog.show();
-            viewModel.createAccount(username, pass, new CheckCreateAccountEvent() {
+            viewModel.createAccount(new User(username,pass,cmnd), new CheckCreateAccountEvent() {
                 @Override
                 public void onCreateSuccess() {
                     dialog.dismiss();

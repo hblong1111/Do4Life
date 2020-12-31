@@ -54,6 +54,26 @@
                     app:hintTextAppearance="@style/MyHintStyle">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtCMND"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#bdbdbd"
+                        android:hint="Nhập số CMND"
+                        android:inputType="number"
+                        android:textColor="#000"
+                        android:textColorHint="#bdbdbd"
+                        android:textCursorDrawable="@null" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textColorHint="#bdbdbd"
+                    app:boxBackgroundMode="outline"
+                    app:hintTextAppearance="@style/MyHintStyle">
+
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
