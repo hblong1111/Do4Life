@@ -1,9 +1,11 @@
 package com.longhb.do4life.network;
 
+import com.longhb.do4life.model.retrofit.json.JsonProfile;
 import com.longhb.do4life.model.retrofit.json.JsonUpdateCMND;
 import com.longhb.do4life.model.retrofit.res.MyAccount;
 import com.longhb.do4life.model.retrofit.res.Post;
 import com.longhb.do4life.model.retrofit.json.JsonAccount;
+import com.longhb.do4life.model.retrofit.res.ProfileRetrofit;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface RetrofitService {
-    //Đăng ký tài khoản
+    //Tài khoản
     @POST("/createAccount")
     Call<Boolean> createAccount(@Body JsonAccount user);
 
@@ -26,6 +28,20 @@ public interface RetrofitService {
     @POST("/getAccountById")
     Call<MyAccount> getAccountById(@Body JsonAccount jsonProfile);
 
+    //Hồ sơ
+    @POST("/createProfile")
+    Call<Boolean> createProfile(@Body JsonProfile jsonProfile);
+
+    @POST("/getProfile")
+    Call<List<ProfileRetrofit>> getProfile(@Body JsonProfile jsonProfileAcc);
+
+    @POST("/updateProfile")
+    Call<Boolean> updateProfile(@Body JsonProfile jsonProfileIDProfile);
+
+    @POST("/deleteProfile")
+    Call<Boolean> deleteProfile(@Body JsonProfile jsonProfileIDProfile);
+
+    //Bài viết
     @GET("/getAllPost")
     Call<List<Post>> getAllPost();
 }

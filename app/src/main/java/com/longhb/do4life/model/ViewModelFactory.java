@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.longhb.do4life.viewmodel.ConfirmAccountViewModel;
 import com.longhb.do4life.viewmodel.HomeFragmentViewModel;
 import com.longhb.do4life.viewmodel.LoginViewModel;
+import com.longhb.do4life.viewmodel.ProfileFragmentViewModel;
 import com.longhb.do4life.viewmodel.RegisterViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
@@ -21,6 +22,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new LoginViewModel();
         }else if (modelClass.isAssignableFrom(ConfirmAccountViewModel.class)) {
             return (T) new ConfirmAccountViewModel();
+        }else if (modelClass.isAssignableFrom(ProfileFragmentViewModel.class)) {
+            return (T) new ProfileFragmentViewModel();
         }
         return null;
     }
