@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.databinding.ActivityConfirmAccountBinding;
-import com.longhb.do4life.model.JsonProfile;
+import com.longhb.do4life.model.retrofit.json.JsonUpdateCMND;
 import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.utils.Common;
 import com.longhb.do4life.utils.SharedUtils;
@@ -26,6 +26,7 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
     Bitmap bitmapT, bitmapS;
     ConfirmAccountViewModel viewModel;
     private AlertDialog alertDialog;
+    private SharedUtils sharedUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
 
         viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(ConfirmAccountViewModel.class);
 
+
+        sharedUtils = SharedUtils.getInstance(ConfirmAccountActivity.this);
         binding.imageCMNDS.setOnClickListener(this);
         binding.imageCMNDT.setOnClickListener(this);
         binding.btnSave.setOnClickListener(this);
@@ -64,7 +67,6 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
                     (dialog, which) -> alertDialog.dismiss());
         } else {
             ProgressDialog dialog = Common.buildDialogLoading(this, "Xin Chờ", "Đang gửi yêu cầu...");
-            dialog.show();
             String[] urlT = new String[1];
             String[] urlS = new String[1];
             viewModel.uploadImage(bitmapT, url -> {
@@ -78,12 +80,15 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
                                 (dialoga, which) -> alertDialog.dismiss());
                     } else {
                         String id = SharedUtils.getInstance(this).getString(Common.KEY_ID_ACC, null);
-                        JsonProfile jsonProfile = new JsonProfile(id,
+                        JsonUpdateCMND jsonUpdateCMND = new JsonUpdateCMND(id,
                                 urlT[0],
                                 urlS[0] );
-                        viewModel.updateAccount(jsonProfile, new ConfirmAccountViewModel.UpdateAccountEvent() {
+                        viewModel.updateAccount(jsonUpdateCMND, new ConfirmAccountViewModel.UpdateAccountEvent() {
                             @Override
                             public void onUpdateSuccess() {
+                                //xác nhận thành công
+                                sharedUtils.setString(Common.KEY_FONT_CMND_ACC,urlT[0]);
+                                sharedUtils.setString(Common.KEY_BACK_CMND_ACC,urlS[0]);
                                 dialog.dismiss();
                                 alertDialog = Common.showDialogAlert(ConfirmAccountActivity.this,
                                         "Đã gửi yêu cầu xác nhận!",

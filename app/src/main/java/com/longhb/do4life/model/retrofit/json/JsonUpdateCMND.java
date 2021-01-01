@@ -1,9 +1,9 @@
-package com.longhb.do4life.model;
+package com.longhb.do4life.model.retrofit.json;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class JsonProfile {
+public class JsonUpdateCMND {
 
 
     @SerializedName("_id")
@@ -16,9 +16,10 @@ public class JsonProfile {
     @Expose
     public String backCMND;
 
-    public JsonProfile(String id, String fontCMND, String backCMND) {
+    public JsonUpdateCMND(String id, String fontCMND, String backCMND) {
         this.id = id;
         this.fontCMND = fontCMND;
         this.backCMND = backCMND;
     }
+
 }

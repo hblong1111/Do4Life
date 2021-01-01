@@ -1,16 +1,13 @@
 package com.longhb.do4life.apdapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.longhb.do4life.R;
 import com.longhb.do4life.databinding.AdapterPostBinding;
-import com.longhb.do4life.model.Post;
+import com.longhb.do4life.model.retrofit.res.Post;
 
 import java.util.List;
 

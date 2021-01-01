@@ -6,7 +6,7 @@
     <data>
         <variable
             name="post"
-            type="com.longhb.do4life.model.Post" />
+            type="com.longhb.do4life.model.retrofit.res.Post" />
 
     </data>
 

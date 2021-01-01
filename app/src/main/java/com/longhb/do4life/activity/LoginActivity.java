@@ -11,9 +11,9 @@ import android.view.View;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.databinding.ActivityLoginBinding;
-import com.longhb.do4life.model.MyAccount;
+import com.longhb.do4life.model.retrofit.res.MyAccount;
 import com.longhb.do4life.model.ViewModelFactory;
-import com.longhb.do4life.model.retrofit.JsonCheckLogin;
+import com.longhb.do4life.model.retrofit.json.JsonAccount;
 import com.longhb.do4life.utils.CheckLoginEvent;
 import com.longhb.do4life.utils.Common;
 import com.longhb.do4life.utils.SharedUtils;
@@ -110,11 +110,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.show();
         String username = binding.edtPhone.getText().toString();
         String pass = binding.edtPass.getText().toString();
-        viewModel.checkLogin(new JsonCheckLogin(username, pass), new CheckLoginEvent() {
+        viewModel.checkLogin(new JsonAccount(username, pass), new CheckLoginEvent() {
             @Override
             public void onLoginSuccess(MyAccount myAccount) {
                 progressDialog.dismiss();
                 prefs.setString(Common.KEY_ID_ACC,myAccount.id);
+                prefs.setString(Common.KEY_FONT_CMND_ACC,myAccount.fontCMND);
+                prefs.setString(Common.KEY_BACK_CMND_ACC,myAccount.backCMND);
                 prefs.setBoolean(Common.KEY_CHECKED_ACC,myAccount.checked);
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 finish();

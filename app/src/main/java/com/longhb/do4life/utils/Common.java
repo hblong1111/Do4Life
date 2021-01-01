@@ -13,6 +13,8 @@ public class Common {
     public static final String CODE_PUT_ID_ACCOUNT = "id_acc";
     public static final String KEY_ID_ACC = "KEY_ID_ACC";
     public static final String KEY_CHECKED_ACC = "KEY_CHECKED_ACC";
+    public static final String KEY_FONT_CMND_ACC ="KEY_FONT_CMND_ACC" ;
+    public static final String KEY_BACK_CMND_ACC ="KEY_BACK_CMND_ACC" ;
 
     public static AlertDialog showDialogAlert(Context context, String mess, String textBtn, DialogInterface.OnClickListener callback) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -20,6 +22,7 @@ public class Common {
         builder.setMessage(mess);
         builder.setNegativeButton(textBtn, callback);
         builder.create();
+        builder.setCancelable(false);
         return builder.show();
     }
 
@@ -27,6 +30,7 @@ public class Common {
         ProgressDialog  dialog=new ProgressDialog(context);
         dialog.setTitle(title);
         dialog.setMessage(mess);
+        dialog.show();
         return dialog;
     }
 

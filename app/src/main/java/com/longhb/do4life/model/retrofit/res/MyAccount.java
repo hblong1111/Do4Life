@@ -1,9 +1,10 @@
-package com.longhb.do4life.model;
+package com.longhb.do4life.model.retrofit.res;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class MyAccount {
+
 
     @SerializedName("_id")
     @Expose
@@ -14,6 +15,9 @@ public class MyAccount {
     @SerializedName("password")
     @Expose
     public String password;
+    @SerializedName("CMND")
+    @Expose
+    public String cMND;
     @SerializedName("checked")
     @Expose
     public Boolean checked;
@@ -23,22 +27,12 @@ public class MyAccount {
     @SerializedName("__v")
     @Expose
     public Integer v;
-
-    public MyAccount(String id, String username, String password, Boolean checked, Boolean status, Integer v) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.checked = checked;
-        this.status = status;
-        this.v = v;
-    }
-
-    public MyAccount() {
-    }
-
-    public MyAccount(String s) {
-        id=s;
-    }
+    @SerializedName("backCMND")
+    @Expose
+    public String backCMND;
+    @SerializedName("fontCMND")
+    @Expose
+    public String fontCMND;
 
     @Override
     public String toString() {
@@ -46,9 +40,12 @@ public class MyAccount {
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", cMND='" + cMND + '\'' +
                 ", checked=" + checked +
                 ", status=" + status +
                 ", v=" + v +
+                ", backCMND='" + backCMND + '\'' +
+                ", fontCMND='" + fontCMND + '\'' +
                 '}';
     }
 }

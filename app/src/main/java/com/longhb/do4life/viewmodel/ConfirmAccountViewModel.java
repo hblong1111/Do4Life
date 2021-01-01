@@ -7,15 +7,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.longhb.do4life.model.JsonProfile;
+import com.longhb.do4life.model.retrofit.json.JsonUpdateCMND;
 import com.longhb.do4life.network.RetrofitModule;
 
 import java.io.ByteArrayOutputStream;
@@ -34,8 +31,8 @@ public class ConfirmAccountViewModel extends ViewModel {
     }
 
 
-    public void updateAccount(JsonProfile jsonProfile, UpdateAccountEvent callback) {
-        RetrofitModule.getInstance().updateAccount(jsonProfile).enqueue(new Callback<Boolean>() {
+    public void updateAccount(JsonUpdateCMND jsonUpdateCMND, UpdateAccountEvent callback) {
+        RetrofitModule.getInstance().updateAccount(jsonUpdateCMND).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.isSuccessful()){

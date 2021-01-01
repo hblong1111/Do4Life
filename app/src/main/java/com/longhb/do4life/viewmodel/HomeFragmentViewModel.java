@@ -1,10 +1,16 @@
 package com.longhb.do4life.viewmodel;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.longhb.do4life.model.Post;
+import com.longhb.do4life.model.retrofit.res.MyAccount;
+import com.longhb.do4life.model.retrofit.res.Post;
+import com.longhb.do4life.model.retrofit.json.JsonAccount;
 import com.longhb.do4life.network.RetrofitModule;
+import com.longhb.do4life.utils.Common;
 
 import java.util.List;
 
@@ -18,7 +24,7 @@ public class HomeFragmentViewModel extends ViewModel {
     public HomeFragmentViewModel() {
     }
 
-    public void getAllPost(Event event) {
+    public void getAllPost(EventGetAllPost event) {
         RetrofitModule.getInstance().getAllPost().enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
@@ -38,7 +44,33 @@ public class HomeFragmentViewModel extends ViewModel {
         });
     }
 
-    public interface Event {
+
+    public void checkChecked(Context context, JsonAccount jsonProfileID, EventGetAccountById callback) {
+        ProgressDialog progressDialog = Common.buildDialogLoading(context, "", "Đang tải...");
+        RetrofitModule.getInstance().getAccountById(jsonProfileID).enqueue(new Callback<MyAccount>() {
+            @Override
+            public void onResponse(Call<MyAccount> call, Response<MyAccount> response) {
+                callback.getAccountByIdSuccess(response.body().checked);
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<MyAccount> call, Throwable t) {
+                callback.getAccountByIdError();
+                t.printStackTrace();
+                progressDialog.dismiss();
+            }
+        });
+    }
+
+
+    public interface EventGetAllPost {
         void getAllPostError();
+    }
+
+    public interface EventGetAccountById {
+        void getAccountByIdSuccess(boolean checked);
+
+        void getAccountByIdError();
     }
 }

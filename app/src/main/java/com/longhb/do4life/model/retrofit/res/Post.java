@@ -1,4 +1,4 @@
-package com.longhb.do4life.model;
+package com.longhb.do4life.model.retrofit.res;
 
 
 import com.google.gson.annotations.Expose;

@@ -1,13 +1,11 @@
 package com.longhb.do4life.fragment;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +15,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
@@ -27,8 +24,9 @@ import com.longhb.do4life.R;
 import com.longhb.do4life.activity.ConfirmAccountActivity;
 import com.longhb.do4life.apdapter.PostAdapter;
 import com.longhb.do4life.databinding.FragmentHomeBinding;
-import com.longhb.do4life.model.Post;
+import com.longhb.do4life.model.retrofit.res.Post;
 import com.longhb.do4life.model.ViewModelFactory;
+import com.longhb.do4life.model.retrofit.json.JsonAccount;
 import com.longhb.do4life.utils.Common;
 import com.longhb.do4life.utils.SharedUtils;
 import com.longhb.do4life.viewmodel.HomeFragmentViewModel;
@@ -44,7 +42,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     PostAdapter adapter;
 
     SharedUtils sharedUtils;
-    private AlertDialog alertDialog;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -67,7 +64,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         ProgressDialog dialog = Common.buildDialogLoading(getContext(), "Đang Tải", "Vui lòng chờ...");
 
-        dialog.show();
 
         adapter = new PostAdapter(postList, pos -> {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(postList.get(pos).url));
@@ -100,14 +96,37 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void datLich() {
         boolean isChecked = sharedUtils.getBoolean(Common.KEY_CHECKED_ACC, false);
-        if (!isChecked) {
+        String fontCMND = sharedUtils.getString(Common.KEY_FONT_CMND_ACC, null);
+        String backCMND = sharedUtils.getString(Common.KEY_BACK_CMND_ACC, null);
+        String idAcc = sharedUtils.getString(Common.KEY_ID_ACC, null);
+        if (fontCMND == null || backCMND == null) {
             showDialogConfirm();
-        }else {
-            //todo: đặt lịch khám
+        } else if (!isChecked) {
+            viewModel.checkChecked(getContext(), new JsonAccount(idAcc), new HomeFragmentViewModel.EventGetAccountById() {
+                @Override
+                public void getAccountByIdSuccess(boolean checked) {
+                    if (checked) {
+                        //todo: dat lich kham
+
+                        Toast.makeText(getContext(), "Đặt lịch khám", Toast.LENGTH_SHORT).show();
+                    } else {
+                        showDialogAlert();
+                    }
+                }
+
+                @Override
+                public void getAccountByIdError() {
+                    Toast.makeText(getContext(), "Có lỗi xảy ra, vui lòng thử lại.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            //todo: dat lich kham
+
+            Toast.makeText(getContext(), "Đặt lịch khám", Toast.LENGTH_SHORT).show();
         }
 
     }
- 
+
     private void showDialogConfirm() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_confirm_acc, null, false);
         Button btnXacNhan;
@@ -122,6 +141,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         btnXacNhan.setOnClickListener(v -> {
             alertDialog.dismiss();
             startActivity(new Intent(getContext(), ConfirmAccountActivity.class));
+        });
+
+    }
+
+    private void showDialogAlert() {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_alert, null, false);
+        Button btnXacNhan;
+        btnXacNhan = view.findViewById(R.id.btnXacNhan);
+
+        Dialog alertDialog = new Dialog(getContext());
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(view);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
+        btnXacNhan.setOnClickListener(v -> {
+            alertDialog.dismiss();
         });
 
     }
