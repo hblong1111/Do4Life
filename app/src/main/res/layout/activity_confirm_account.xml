@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        android:paddingHorizontal="20dp"
+        tools:context=".activity.ConfirmAccountActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|left"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Quay lại"
+                android:textColor="#1c8eff"
+                android:textSize="9pt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Xác nhận tài khoản"
+                android:textColor="#000"
+                android:textSize="12pt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Ảnh CMND( Măt trước)"
+                android:textSize="17dp" />
+
+            <ImageView
+                android:id="@+id/imageCMNDT"
+                android:layout_width="match_parent"
+                android:layout_height="241dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/image" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Ảnh CMND( Măt sau)"
+                android:textSize="17dp" />
+
+            <ImageView
+                android:id="@+id/imageCMNDS"
+                android:layout_width="match_parent"
+                android:layout_height="241dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/image" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/bg_btn_login"
+                android:fontFamily="@font/roboto_bold"
+                android:onClick="onSignUp"
+                android:text="Xác nhận"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="9pt" />
+        </LinearLayout>
+    </ScrollView>
+</layout>
