@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.longhb.do4life.R;
+import com.longhb.do4life.activity.ProfileDetail;
 import com.longhb.do4life.activity.ThemHoSoActivity;
 import com.longhb.do4life.apdapter.ProfileAdapter;
 import com.longhb.do4life.databinding.FragmentProfileBinding;
@@ -129,7 +130,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, P
     }
 
     @Override
-    public void clickItem(int pos) {
+    public void onResume() {
+        super.onResume();
+        viewModel.getProfile(new JsonProfile(SharedUtils.getInstance(getContext()).getString(Common.KEY_ID_ACC, null)));
 
+    }
+
+    @Override
+    public void clickItem(int pos) {
+        Intent intent = new Intent(getContext(), ProfileDetail.class);
+        intent.putExtra(Common.CODE_PUT_PROFILE, list.get(pos));
+        startActivity(intent);
     }
 }
