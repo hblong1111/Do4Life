@@ -1,6 +1,7 @@
 package com.longhb.do4life.network;
 
 import com.longhb.do4life.model.retrofit.json.JsonProfile;
+import com.longhb.do4life.model.retrofit.json.JsonShift;
 import com.longhb.do4life.model.retrofit.json.JsonUpdateCMND;
 import com.longhb.do4life.model.retrofit.res.Department;
 import com.longhb.do4life.model.retrofit.res.MyAccount;
@@ -52,6 +53,6 @@ public interface RetrofitService {
     Call<List<Department>> getAllDepartment();
 
     //Ca khám
-    @GET("/getAllShiftByDepartmentId")
-    Call<List<Shift>> getAllShiftByDepartmentId();
+    @POST("/getAllShiftByDepartmentId")
+    Call<List<Shift>> getAllShiftByDepartmentId( @Body JsonShift jsonShift);
 }

@@ -9,6 +9,7 @@ import com.longhb.do4life.viewmodel.HomeFragmentViewModel;
 import com.longhb.do4life.viewmodel.LoginViewModel;
 import com.longhb.do4life.viewmodel.ProfileFragmentViewModel;
 import com.longhb.do4life.viewmodel.RegisterViewModel;
+import com.longhb.do4life.viewmodel.ScheduleActivityViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
@@ -24,6 +25,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new ConfirmAccountViewModel();
         }else if (modelClass.isAssignableFrom(ProfileFragmentViewModel.class)) {
             return (T) new ProfileFragmentViewModel();
+        }else if (modelClass.isAssignableFrom(ScheduleActivityViewModel.class)) {
+            return (T) new ScheduleActivityViewModel();
         }
         return null;
     }

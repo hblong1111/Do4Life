@@ -23,4 +23,16 @@ public class Shift {
     @SerializedName("__v")
     @Expose
     public Integer v;
+
+    @Override
+    public String toString() {
+        return "Shift{" +
+                "id='" + id + '\'' +
+                ", department='" + department + '\'' +
+                ", doctor='" + doctor + '\'' +
+                ", time='" + time + '\'' +
+                ", status='" + status + '\'' +
+                ", v=" + v +
+                '}';
+    }
 }
