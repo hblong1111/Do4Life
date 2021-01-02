@@ -68,16 +68,16 @@ public class ProfileFragmentViewModel extends ViewModel {
         });
     }
 
-    public void deleteProfile(JsonProfile jsonProfile) {
+    public void deleteProfile(JsonProfile jsonProfile,EventCreate callback) {
         RetrofitModule.getInstance().deleteProfile(jsonProfile).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                Log.d("hblong", "ProfileFragmentViewModel | onResponse: " + response.body());
+                callback.onSuccess(response.body());
             }
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                Log.e("hblong", " | onFailure: ", t);
+                callback.onError();
             }
         });
     }

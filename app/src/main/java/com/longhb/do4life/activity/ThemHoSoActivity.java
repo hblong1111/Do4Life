@@ -9,9 +9,7 @@ import android.view.View;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.databinding.ActivityThemHoSoBinding;
-import com.longhb.do4life.model.Profile;
 import com.longhb.do4life.model.retrofit.json.JsonProfile;
-import com.longhb.do4life.model.retrofit.res.ProfileRetrofit;
 import com.longhb.do4life.utils.Common;
 import com.longhb.do4life.utils.SharedUtils;
 

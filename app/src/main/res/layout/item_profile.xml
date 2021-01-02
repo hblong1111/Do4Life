@@ -58,12 +58,13 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/btn_showMore"
+        android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|right"
         android:background="#EA3B3A"
-        android:src="@drawable/ic_more_horiz"
+        android:padding="24dp"
+        android:src="@drawable/ic_delete"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"

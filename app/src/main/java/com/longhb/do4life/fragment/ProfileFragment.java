@@ -10,22 +10,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.activity.ProfileDetail;
 import com.longhb.do4life.activity.ThemHoSoActivity;
 import com.longhb.do4life.apdapter.ProfileAdapter;
 import com.longhb.do4life.databinding.FragmentProfileBinding;
-import com.longhb.do4life.model.Profile;
 import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.model.retrofit.json.JsonProfile;
 import com.longhb.do4life.model.retrofit.res.ProfileRetrofit;
@@ -141,5 +138,31 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, P
         Intent intent = new Intent(getContext(), ProfileDetail.class);
         intent.putExtra(Common.CODE_PUT_PROFILE, list.get(pos));
         startActivity(intent);
+    }
+
+    @Override
+    public void deleteItem(int pos) {
+        ProgressDialog progressDialog = Common.buildDialogLoading(getContext(), null, "Đang tải...");
+        ProfileRetrofit profileRetrofit = list.get(pos);
+        Log.d("hblong", "ProfileFragment | deleteItem: " + profileRetrofit.id);
+        viewModel.deleteProfile(new JsonProfile(profileRetrofit.id,""), new ProfileFragmentViewModel.EventCreate() {
+            @Override
+            public void onSuccess(boolean res) {
+                if (res) {
+                    viewModel.getProfile(new JsonProfile(SharedUtils.getInstance(getContext()).getString(Common.KEY_ID_ACC, null)));
+                    progressDialog.dismiss();
+                } else {
+                    progressDialog.dismiss(); 
+                    Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError() {
+                progressDialog.dismiss();
+
+                Toast.makeText(getContext(), "Error!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -1,23 +1,18 @@
 package com.longhb.do4life.apdapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.longhb.do4life.R;
-import com.longhb.do4life.model.Profile;
 import com.longhb.do4life.model.retrofit.res.ProfileRetrofit;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.RecyclerViewHolder> {
     List<ProfileRetrofit> listPro;
@@ -46,6 +41,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.Recycler
                 event.clickItem(position);
             }
         });
+
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                event.deleteItem(position);
+            }
+        });
     }
 
     @Override
@@ -56,16 +58,20 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.Recycler
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         private TextView tvName;
         private TextView tvAge;
+        private ImageButton btnDelete;
+
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvName);
             tvAge = itemView.findViewById(R.id.tvAge);
-
+            btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 
     public interface Event {
         void clickItem(int pos);
+
+        void deleteItem(int pos);
     }
 }
