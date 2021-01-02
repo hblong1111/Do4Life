@@ -23,7 +23,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.UpdateProfileActivity"></activity>
+        <activity android:name=".activity.DatLichActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.UpdateProfileActivity" />
         <activity android:name=".activity.ProfileDetail" />
         <activity android:name=".activity.ThemHoSoActivity" />
         <activity android:name=".activity.RePassWordActivity" />
@@ -35,11 +43,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.SplashActivity" />
         <activity android:name=".TestViewModelActivity" />

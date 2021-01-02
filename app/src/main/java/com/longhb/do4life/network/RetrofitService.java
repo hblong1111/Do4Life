@@ -2,10 +2,12 @@ package com.longhb.do4life.network;
 
 import com.longhb.do4life.model.retrofit.json.JsonProfile;
 import com.longhb.do4life.model.retrofit.json.JsonUpdateCMND;
+import com.longhb.do4life.model.retrofit.res.Department;
 import com.longhb.do4life.model.retrofit.res.MyAccount;
 import com.longhb.do4life.model.retrofit.res.Post;
 import com.longhb.do4life.model.retrofit.json.JsonAccount;
 import com.longhb.do4life.model.retrofit.res.ProfileRetrofit;
+import com.longhb.do4life.model.retrofit.res.Shift;
 
 import java.util.List;
 
@@ -44,4 +46,12 @@ public interface RetrofitService {
     //Bài viết
     @GET("/getAllPost")
     Call<List<Post>> getAllPost();
+
+    //Khoa khám
+    @GET("/getAllDepartment")
+    Call<List<Department>> getAllDepartment();
+
+    //Ca khám
+    @GET("/getAllShiftByDepartmentId")
+    Call<List<Shift>> getAllShiftByDepartmentId();
 }
