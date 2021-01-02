@@ -23,27 +23,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.RePassWordActivity"></activity>
+        <activity android:name=".activity.ThemHoSoActivity"></activity>
+        <activity android:name=".activity.RePassWordActivity" />
         <activity android:name=".activity.ResetPassActivity" />
         <activity android:name=".activity.ConfirmAccountActivity" />
         <activity
             android:name=".activity.HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-        <activity android:name=".activity.RegisterActivity" >
-
-        </activity>
-        <activity android:name=".activity.LoginActivity" >
-
-
-
-        </activity>
-        <activity android:name=".activity.SplashActivity">
-
-        </activity>
-        <activity android:name=".TestViewModelActivity" >
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.LoginActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,5 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.SplashActivity"></activity>
+        <activity android:name=".TestViewModelActivity">
+        </activity>
     </application>
+
 </manifest>

@@ -1,48 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:padding="7dp"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.ProfileFragment">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/adsa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            android:layout_marginTop="30dp"
-            android:text="Hồ sơ"
-            android:textColor="#000000"
-            android:textSize="27sp"
-            android:textStyle="bold"
-            tools:ignore="NotSibling" />
+    xmlns:tools="http://schemas.android.com/tools">
 
-        <TextView
-            android:id="@+id/tvAddProfile"
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:padding="7dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.ProfileFragment">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/adsa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginTop="30dp"
+                android:text="Hồ sơ"
+                android:textColor="#000000"
+                android:textSize="27sp"
+                android:textStyle="bold"
+                tools:ignore="NotSibling" />
+
+            <TextView
+                android:id="@+id/tvAddProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="185dp"
+                android:text="+ Thêm hồ sơ"
+                android:gravity="right"
+                android:textAlignment="gravity"
+                android:textColor="#0091FF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginLeft="185dp"
-            android:text="+ Thêm hồ sơ"
-            android:gravity="right"
-            android:textAlignment="gravity"
-            android:textColor="#0091FF"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="5dp"
+            android:paddingLeft="10dp"
+            app:layout_constraintVertical_bias="0.0"></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_Profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="10dp"
-        app:layout_constraintVertical_bias="0.0">
-    </androidx.recyclerview.widget.RecyclerView>
-</LinearLayout>
+</layout>

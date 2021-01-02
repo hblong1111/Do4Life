@@ -18,15 +18,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileFragmentViewModel extends ViewModel {
-    public void createProfile(JsonProfile jsonProfile) {
+    public void createProfile(JsonProfile jsonProfile,EventCreate callback) {
         RetrofitModule.getInstance().createProfile(jsonProfile).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                Log.d("hblong", "ProfileFragmentViewModel | onResponse: " + response.body());
+                callback.onSuccess(response.body());
             }
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
+                callback.onError();
             }
         });
     }
@@ -70,5 +71,10 @@ public class ProfileFragmentViewModel extends ViewModel {
                 Log.e("hblong", " | onFailure: ", t);
             }
         });
+    }
+
+    public interface EventCreate{
+        void onSuccess(boolean res);
+        void onError();
     }
 }

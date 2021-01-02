@@ -15,6 +15,7 @@ public class Common {
     public static final String KEY_CHECKED_ACC = "KEY_CHECKED_ACC";
     public static final String KEY_FONT_CMND_ACC ="KEY_FONT_CMND_ACC" ;
     public static final String KEY_BACK_CMND_ACC ="KEY_BACK_CMND_ACC" ;
+    public static final String CODE_PUT_PROFILE = "CODE_PUT_PROFILE";
 
     public static AlertDialog showDialogAlert(Context context, String mess, String textBtn, DialogInterface.OnClickListener callback) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

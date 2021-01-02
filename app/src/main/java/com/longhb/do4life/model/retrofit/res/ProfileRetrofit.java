@@ -3,7 +3,9 @@ package com.longhb.do4life.model.retrofit.res;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ProfileRetrofit {
+import java.io.Serializable;
+
+public class ProfileRetrofit implements Serializable {
 
     @SerializedName("_id")
     @Expose
@@ -24,4 +26,22 @@ public class ProfileRetrofit {
     @Expose
     public Integer v;
 
+    public ProfileRetrofit(String account, String fullname, Integer age, String phoneNumber) {
+        this.account = account;
+        this.fullname = fullname;
+        this.age = age;
+        this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "ProfileRetrofit{" +
+                "id='" + id + '\'' +
+                ", account='" + account + '\'' +
+                ", fullname='" + fullname + '\'' +
+                ", age=" + age +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", v=" + v +
+                '}';
+    }
 }
