@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
     android:layout_marginTop="5dp"
-    android:paddingBottom="10dp"
-    android:paddingLeft="10dp"
-    android:orientation="horizontal"
     android:background="@drawable/border_profile"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="horizontal"
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageProfile"
         loadImage="avata"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/phuongly"
+        android:src="@drawable/logo_splash"
         app:civ_border_color="#FFF"
         app:civ_border_width="4dp"
-        tools:ignore="MissingConstraints"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_gravity="center"
+        android:layout_marginLeft="16dp"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints"
-        android:layout_marginLeft="20dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circleImageProfile"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/tv_Name"
+            android:id="@+id/tvName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
@@ -44,21 +49,23 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_birth"
+            android:id="@+id/tvAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="17dp"
             android:text="@string/tv_birthday"
-            android:textColor="#FFF" />
+            android:textColor="#FFF"
+            android:textSize="17dp" />
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/btn_showMore"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="130dp"
         android:layout_gravity="center|right"
         android:background="#EA3B3A"
         android:src="@drawable/ic_more_horiz"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
         tools:ignore="MissingConstraints" />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

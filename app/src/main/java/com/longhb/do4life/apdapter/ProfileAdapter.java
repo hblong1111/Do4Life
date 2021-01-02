@@ -11,33 +11,41 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.model.Profile;
+import com.longhb.do4life.model.retrofit.res.ProfileRetrofit;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-    public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.RecyclerViewHolder> {
-    private ArrayList<Profile> listPro;
-    Context context;
+public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.RecyclerViewHolder> {
+    List<ProfileRetrofit> listPro;
+    Event event;
 
-    public ProfileAdapter(ArrayList<Profile> listPro, Context context) {
+    public  ProfileAdapter(List<ProfileRetrofit> listPro, Event event) {
         this.listPro = listPro;
-        this.context = context;
+        this.event = event;
     }
 
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_profile, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_profile, parent, false);
         return new RecyclerViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        holder.tv_Name.setText(listPro.get(position).nameUser);
-        holder.tv_birth.setText(listPro.get(position).birth);
-        Picasso.with(context).load(listPro.get(position).imageUser).into(holder.circleImageProfile);
+        holder.tvAge.setText(listPro.get(position).age + "");
+        holder.tvName.setText(listPro.get(position).fullname);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                event.clickItem(position);
+            }
+        });
     }
 
     @Override
@@ -46,13 +54,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_Name,tv_birth;
-        CircleImageView circleImageProfile;
+        private TextView tvName;
+        private TextView tvAge;
+
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            circleImageProfile=itemView.findViewById(R.id.circleImageProfile);
-            tv_Name=itemView.findViewById(R.id.tv_Name);
-            tv_birth=itemView.findViewById(R.id.tv_birth);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvAge = itemView.findViewById(R.id.tvAge);
+
         }
+    }
+
+    public interface Event {
+        void clickItem(int pos);
     }
 }

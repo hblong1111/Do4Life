@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.longhb.do4life.model.retrofit.json.JsonProfile;
@@ -18,7 +19,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileFragmentViewModel extends ViewModel {
-    public void createProfile(JsonProfile jsonProfile,EventCreate callback) {
+
+    private MutableLiveData<List<ProfileRetrofit>> listProfile = new MutableLiveData<>();
+
+    public MutableLiveData<List<ProfileRetrofit>> getListProfile() {
+        return listProfile;
+    }
+
+    public void createProfile(JsonProfile jsonProfile, EventCreate callback) {
         RetrofitModule.getInstance().createProfile(jsonProfile).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -36,7 +44,7 @@ public class ProfileFragmentViewModel extends ViewModel {
         RetrofitModule.getInstance().getProfile(jsonProfile).enqueue(new Callback<List<ProfileRetrofit>>() {
             @Override
             public void onResponse(Call<List<ProfileRetrofit>> call, Response<List<ProfileRetrofit>> response) {
-                Log.d("hblong", "ProfileFragmentViewModel | onResponse: " + response.body().size());
+                listProfile.postValue(response.body());
             }
 
             @Override
@@ -59,6 +67,7 @@ public class ProfileFragmentViewModel extends ViewModel {
             }
         });
     }
+
     public void deleteProfile(JsonProfile jsonProfile) {
         RetrofitModule.getInstance().deleteProfile(jsonProfile).enqueue(new Callback<Boolean>() {
             @Override
@@ -73,8 +82,9 @@ public class ProfileFragmentViewModel extends ViewModel {
         });
     }
 
-    public interface EventCreate{
+    public interface EventCreate {
         void onSuccess(boolean res);
+
         void onError();
     }
 }

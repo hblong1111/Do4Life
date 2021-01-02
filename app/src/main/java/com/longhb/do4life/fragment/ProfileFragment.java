@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,47 +29,53 @@ import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.model.retrofit.json.JsonProfile;
 import com.longhb.do4life.model.retrofit.res.ProfileRetrofit;
 import com.longhb.do4life.utils.Common;
+import com.longhb.do4life.utils.SharedUtils;
 import com.longhb.do4life.viewmodel.ProfileFragmentViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class ProfileFragment extends Fragment implements View.OnClickListener {
+public class ProfileFragment extends Fragment implements View.OnClickListener, ProfileAdapter.Event {
     private static final int CODE_ADD_PROFILE = 0;
     FragmentProfileBinding binding;
-    private ProfileAdapter profileAdapter;
 
     ProfileFragmentViewModel viewModel;
     private AlertDialog alertDialog;
+
+    List<ProfileRetrofit> list;
+    ProfileAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater);
         viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(ProfileFragmentViewModel.class);
 
+
+        settingRCV();
+
         binding.tvAddProfile.setOnClickListener(this);
 
-        getData();
+        viewModel.getProfile(new JsonProfile(SharedUtils.getInstance(getContext()).getString(Common.KEY_ID_ACC, null)));
+        Log.d("hblong", "ProfileFragment | onCreateView: " + SharedUtils.getInstance(getContext()).getString(Common.KEY_ID_ACC, null));
+
         return binding.getRoot();
     }
 
-    private void getData() {
-        ArrayList<Profile> prolist = new ArrayList<>();
-        prolist.add(new Profile("NAme", R.drawable.phuongly, "03/02/1000"));
-        prolist.add(new Profile("NAme", R.drawable.phuongly, "03/02/1000"));
-        prolist.add(new Profile("NAme", R.drawable.phuongly, "03/02/1000"));
-        prolist.add(new Profile("NAme", R.drawable.phuongly, "03/02/1000"));
-        prolist.add(new Profile("NAme", R.drawable.phuongly, "03/02/1000"));
-        prolist.add(new Profile("NAme", R.drawable.phuongly, "03/02/1000"));
-        prolist.add(new Profile("NAme", R.drawable.phuongly, "03/02/1000"));
-        prolist.add(new Profile("NAme", R.drawable.phuongly, "03/02/1000"));
-        prolist.add(new Profile("NAme", R.drawable.phuongly, "03/02/1000"));
-        prolist.add(new Profile("NAme", R.drawable.phuongly, "03/02/1000"));
+    private void settingRCV() {
+        list = new ArrayList<>();
+        adapter = new ProfileAdapter(list, this);
 
-        profileAdapter = new ProfileAdapter(prolist, getContext());
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        binding.rcv.setAdapter(profileAdapter);
-        binding.rcv.setLayoutManager(layoutManager);
+        binding.rcv.setAdapter(adapter);
+        binding.rcv.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        viewModel.getListProfile().observe(getActivity(), profileRetrofits -> {
+            list.clear();
+            list.addAll(profileRetrofits);
+            adapter.notifyDataSetChanged();
+            Log.d("hblong", "ProfileFragment | settingRCV: " + profileRetrofits.size());
+        });
+
     }
 
     @Override
@@ -100,7 +107,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                             public void onClick(DialogInterface dialog, int which) {
                                 alertDialog.dismiss();
                                 progressDialog.dismiss();
-                                //todo: lấy lại danh sách hồ sơ
+
+                                viewModel.getProfile(new JsonProfile(SharedUtils.getInstance(getContext()).getString(Common.KEY_ID_ACC, null)));
                             }
                         });
                     }
@@ -118,5 +126,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 });
             }
         }
+    }
+
+    @Override
+    public void clickItem(int pos) {
+
     }
 }

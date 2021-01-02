@@ -40,7 +40,7 @@ public class ThemHoSoActivity extends AppCompatActivity implements View.OnClickL
                 String numberPhone = binding.edtPhone.getText().toString();
                 int age = Integer.parseInt(binding.edtNamSinh.getText().toString());
                 Intent returnIntent = new Intent();
-                JsonProfile profile = new JsonProfile(acc,  age,name, numberPhone);
+                JsonProfile profile = new JsonProfile(acc, name, age, numberPhone);
                 returnIntent.putExtra(Common.CODE_PUT_PROFILE, (Serializable) profile);
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
