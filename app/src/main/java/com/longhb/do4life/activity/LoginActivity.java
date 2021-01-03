@@ -133,7 +133,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
                 builder.create();
                 alertDialog = builder.show();
-
             }
         });
     }

@@ -5,7 +5,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">LyLy@com</string>
     <string name="nav_header_subtitle">Phương Ly</string>
+    <string name="tv_title">Phương Ly</string>
+    <string name="tv_content">hí ae</string>
     <string name="tv_birthday">06/08/2000</string>
+    <string name="tv_day">01/01/2021</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -14,7 +17,7 @@
     <string name="menu_scheduleExam">Danh sách lịch khám</string>
     <string name="menu_historyExam">Lịch sử khám</string>
     <string name="menu_about">Giới thiệu</string>
-    <string name="menu_policy">Chính sách</string>
+    <string name="menu_notification">Thông báo</string>
     <string name="menu_logout"></string>
     <string name="menu_logout1">Đăng xuất</string>
 </resources>

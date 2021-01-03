@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    android:orientation="vertical"
+    android:background="@drawable/ic_border">
+    <TextView
+        android:id="@+id/tv_title_notifi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_title"
+        android:textColor="#000"
+        android:textSize="26dp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tv_content_notifi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_content"
+        android:layout_marginTop="5dp"
+        android:textColor="#000"
+        android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/tv_day_notifi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="right"
+        android:text="@string/tv_day"
+        android:textColor="#000"
+        android:textSize="15dp" />
+</LinearLayout>
