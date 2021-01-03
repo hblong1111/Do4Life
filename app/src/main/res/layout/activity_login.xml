@@ -7,47 +7,35 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".activity.LoginActivity">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:textColor="#FE0000"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:layout_marginTop="100dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="90dp"
             app:srcCompat="@drawable/logo_splash" />
-
+        <TextView
+            android:id="@+id/txtAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:fontFamily="@font/roboto_regular"
+            android:text=""
+            android:textColor="#ff002b" />
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tipPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="50dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:textColor="#000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView3">
+            android:textColor="#000">
 
             <EditText
                 android:id="@+id/edtPhone"
@@ -67,89 +55,58 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
             android:textColor="#000"
+            android:textColorHint="#bdbdbd"
             app:passwordToggleEnabled="true"
-            app:hintTextAppearance="@style/MyHintStyle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tipPhone">
+            app:boxBackgroundMode="outline">
 
             <EditText
                 android:id="@+id/edtPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nhập mật khẩu"
-                android:inputType="textEmailAddress"
+                android:inputType="textPassword"
                 android:textColor="#000"
                 android:textColorHint="#bdbdbd" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="358dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/bg_btn_login"
-            android:fontFamily="@font/roboto_bold"
-            android:onClick="onClickLogin"
-            android:paddingVertical="10dp"
-            android:text="Đăng nhập"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="9pt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.547"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tipPass" />
-
-        <TextView
-            android:id="@+id/tvSignIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="Bạn chưa có tài khoản?"
-            android:textColor="#1c8eff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
-
-        <TextView
-            android:id="@+id/tvQuenMatKhau"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="Quên mật khẩu?"
-            android:textColor="#1c8eff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
-
-        <TextView
-            android:id="@+id/txtAlert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="244dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text=""
-            android:textColor="#ff002b"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <CheckBox
             android:id="@+id/ckbSavePass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Nhớ mật khẩu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.082"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tipPass" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="24dp"
+            android:text="Nhớ mật khẩu" />
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/bg_btn_login"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Đăng nhập"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="9pt" />
+
+        <TextView
+            android:id="@+id/tvQuenMatKhau"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Quên mật khẩu?"
+            android:textColor="#1c8eff" />
+        <TextView
+            android:id="@+id/tvSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Bạn chưa có tài khoản?"
+            android:textColor="#1c8eff" />
+    </LinearLayout>
 </layout>
