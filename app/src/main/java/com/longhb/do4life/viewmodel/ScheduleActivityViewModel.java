@@ -3,6 +3,7 @@ package com.longhb.do4life.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.longhb.do4life.model.retrofit.json.JsonCreateSchedule;
 import com.longhb.do4life.model.retrofit.json.JsonProfile;
 import com.longhb.do4life.model.retrofit.json.JsonShift;
 import com.longhb.do4life.model.retrofit.res.Department;
@@ -76,6 +77,24 @@ public class ScheduleActivityViewModel extends ViewModel {
         });
     }
 
+    public void createSchedule( JsonCreateSchedule createSchedule,EventCreateSchedule callback) {
+        RetrofitModule.getInstance().createSchedule(createSchedule).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.isSuccessful() && response.body()) {
+                    callback.onSuccess();
+                    return;
+                }
+                callback.onError();
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                callback.onError();
+            }
+        });
+    }
+
     public MutableLiveData<List<Shift>> getLitShift() {
         return litShift;
     }
@@ -93,6 +112,11 @@ public class ScheduleActivityViewModel extends ViewModel {
     }
     public interface EventGetProfile {
         void onSuccess(List<ProfileRetrofit> body);
+
+        void onError();
+    }
+    public interface EventCreateSchedule {
+        void onSuccess();
 
         void onError();
     }

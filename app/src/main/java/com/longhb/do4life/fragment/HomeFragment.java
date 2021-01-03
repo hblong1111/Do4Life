@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.activity.ConfirmAccountActivity;
+import com.longhb.do4life.activity.ScheduleActivity;
 import com.longhb.do4life.apdapter.PostAdapter;
 import com.longhb.do4life.databinding.FragmentHomeBinding;
 import com.longhb.do4life.model.retrofit.res.Post;
@@ -106,9 +107,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void getAccountByIdSuccess(boolean checked) {
                     if (checked) {
-                        //todo: dat lich kham
-
-                        Toast.makeText(getContext(), "Đặt lịch khám", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getContext(), ScheduleActivity.class));
                     } else {
                         showDialogAlert();
                     }
@@ -120,9 +119,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
             });
         } else {
-            //todo: dat lich kham
-
-            Toast.makeText(getContext(), "Đặt lịch khám", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getContext(), ScheduleActivity.class));
         }
 
     }

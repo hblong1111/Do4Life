@@ -19,7 +19,7 @@ public class Shift {
     public String time;
     @SerializedName("status")
     @Expose
-    public String status;
+    public boolean status;
     @SerializedName("__v")
     @Expose
     public Integer v;

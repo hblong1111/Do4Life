@@ -1,5 +1,6 @@
 package com.longhb.do4life.network;
 
+import com.longhb.do4life.model.retrofit.json.JsonCreateSchedule;
 import com.longhb.do4life.model.retrofit.json.JsonProfile;
 import com.longhb.do4life.model.retrofit.json.JsonShift;
 import com.longhb.do4life.model.retrofit.json.JsonUpdateCMND;
@@ -55,4 +56,8 @@ public interface RetrofitService {
     //Ca khám
     @POST("/getAllShiftByDepartmentId")
     Call<List<Shift>> getAllShiftByDepartmentId( @Body JsonShift jsonShift);
+
+    //Tạo lịch khám
+    @POST("/createSchedule")
+    Call<Boolean> createSchedule( @Body JsonCreateSchedule jsonCreateSchedule);
 }

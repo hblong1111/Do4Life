@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.longhb.do4life.R;
 import com.longhb.do4life.databinding.ActivityDatLichBinding;
 import com.longhb.do4life.model.ViewModelFactory;
+import com.longhb.do4life.model.retrofit.json.JsonCreateSchedule;
 import com.longhb.do4life.model.retrofit.json.JsonProfile;
 import com.longhb.do4life.model.retrofit.json.JsonShift;
 import com.longhb.do4life.model.retrofit.res.Department;
@@ -25,7 +27,7 @@ import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScheduleActivity extends AppCompatActivity {
+public class ScheduleActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityDatLichBinding binding;
     ScheduleActivityViewModel viewModel;
@@ -56,12 +58,9 @@ public class ScheduleActivity extends AppCompatActivity {
 
         settingSpinnerShift();
 
-        binding.btnXacNhan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("hblong", "ScheduleActivity | onClick: " + shiftListTrue.get(binding.spinnerShift.getSelectedIndex()).toString());
-            }
-        });
+        binding.btnXacNhan.setOnClickListener(this);
+        binding.btnBack.setOnClickListener(this);
+        binding.btnHuy.setOnClickListener(this);
 
     }
 
@@ -100,7 +99,7 @@ public class ScheduleActivity extends AppCompatActivity {
             List<String> strings = new ArrayList<>();
 
             for (Shift shift : shiftList) {
-                if (shift.status.equals("false")) continue;
+                if (!shift.status) continue;
                 shiftListTrue.add(shift);
                 strings.add(shift.time);
             }
@@ -151,5 +150,42 @@ public class ScheduleActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnXacNhan:
+                addSchedule();
+                break;
+            case R.id.btnBack:
+            case R.id.btnHuy:
+                onBackPressed();
+                break;
+        }
+    }
+
+    private void addSchedule() {
+        if (binding.spinnerProfile.getSelectedIndex() >= 0 && binding.spinnerDepartment.getSelectedIndex() >= 0 && binding.spinnerShift.getSelectedIndex() >= 0) {
+            progressDialog.show();
+            Shift shift = shiftListTrue.get(binding.spinnerShift.getSelectedIndex());
+            ProfileRetrofit profileRetrofit = listProfile.get(binding.spinnerProfile.getSelectedIndex());
+            viewModel.createSchedule(new JsonCreateSchedule(shift.id, profileRetrofit.id), new ScheduleActivityViewModel.EventCreateSchedule() {
+                @Override
+                public void onSuccess() {
+                    progressDialog.dismiss();
+                    Toast.makeText(ScheduleActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                    onBackPressed();
+                }
+
+                @Override
+                public void onError() {
+                    progressDialog.dismiss();
+                    Toast.makeText(ScheduleActivity.this, "Error!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "Mời nhập đủ thông tin.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
