@@ -12,44 +12,54 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.model.Exam;
+import com.longhb.do4life.model.retrofit.res.Schedule;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExamScheduleAdapter extends RecyclerView.Adapter<ExamScheduleAdapter.RecyclerViewHolder> {
-    private ArrayList<Exam> examList;
-    Context context;
+    List<Schedule> schedules;
 
-    public ExamScheduleAdapter(ArrayList<Exam> examList, Context context) {
-        this.examList = examList;
-        this.context = context;
+    Event callback;
+
+    public ExamScheduleAdapter(List<Schedule> schedules, Event callback) {
+        this.schedules = schedules;
+        this.callback = callback;
     }
 
     @NonNull
     @Override
     public ExamScheduleAdapter.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exam_schedule, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exam_schedule, parent, false);
         return new RecyclerViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ExamScheduleAdapter.RecyclerViewHolder holder, int position) {
-        holder.tv_stt.setText(examList.get(position).STT);
-        holder.tv_Name_exam.setText(examList.get(position).Name);
-        holder.tv_day.setText(examList.get(position).day);
+        holder.tv_stt.setText((position + 1) + "");
+        holder.tv_Name_exam.setText(schedules.get(position).profileName);
+        holder.tv_day.setText(schedules.get(position).time);
+
+        holder.itemView.setOnClickListener(v -> callback.onClickItem(position));
     }
 
     @Override
     public int getItemCount() {
-        return examList.size();
+        return schedules.size();
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_stt,tv_Name_exam,tv_day;
+        TextView tv_stt, tv_Name_exam, tv_day;
+
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_stt=itemView.findViewById(R.id.tv_stt_exam);
-            tv_Name_exam=itemView.findViewById(R.id.tv_Name_exam);
-            tv_day=itemView.findViewById(R.id.tv_day_exam);
+            tv_stt = itemView.findViewById(R.id.tv_stt_exam);
+            tv_Name_exam = itemView.findViewById(R.id.tv_Name_exam);
+            tv_day = itemView.findViewById(R.id.tv_day_exam);
         }
+    }
+
+    public interface Event {
+        void onClickItem(int pos);
     }
 }
