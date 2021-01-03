@@ -12,16 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.model.Exam;
+import com.longhb.do4life.model.retrofit.res.Schedule;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExamScheduleAdapter extends RecyclerView.Adapter<ExamScheduleAdapter.RecyclerViewHolder> {
-    private ArrayList<Exam> examList;
-    Context context;
+    List<Schedule> schedules;
 
-    public ExamScheduleAdapter(ArrayList<Exam> examList, Context context) {
-        this.examList = examList;
-        this.context = context;
+    public ExamScheduleAdapter(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 
     @NonNull
@@ -33,14 +33,14 @@ public class ExamScheduleAdapter extends RecyclerView.Adapter<ExamScheduleAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ExamScheduleAdapter.RecyclerViewHolder holder, int position) {
-        holder.tv_stt.setText(examList.get(position).STT);
-        holder.tv_Name_exam.setText(examList.get(position).Name);
-        holder.tv_day.setText(examList.get(position).day);
+        holder.tv_stt.setText((position+1)+"");
+        holder.tv_Name_exam.setText(schedules.get(position).profileName);
+        holder.tv_day.setText(schedules.get(position).time);
     }
 
     @Override
     public int getItemCount() {
-        return examList.size();
+        return schedules.size();
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.longhb.do4life.viewmodel.ConfirmAccountViewModel;
+import com.longhb.do4life.viewmodel.ExamScheduleFragmentViewModel;
 import com.longhb.do4life.viewmodel.HomeFragmentViewModel;
 import com.longhb.do4life.viewmodel.LoginViewModel;
 import com.longhb.do4life.viewmodel.ProfileFragmentViewModel;
@@ -27,6 +28,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new ProfileFragmentViewModel();
         }else if (modelClass.isAssignableFrom(ScheduleActivityViewModel.class)) {
             return (T) new ScheduleActivityViewModel();
+        }else if (modelClass.isAssignableFrom(ExamScheduleFragmentViewModel.class)) {
+            return (T) new ExamScheduleFragmentViewModel();
         }
         return null;
     }
