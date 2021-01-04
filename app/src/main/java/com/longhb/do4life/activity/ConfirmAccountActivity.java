@@ -82,13 +82,13 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
                         String id = SharedUtils.getInstance(this).getString(Common.KEY_ID_ACC, null);
                         JsonUpdateCMND jsonUpdateCMND = new JsonUpdateCMND(id,
                                 urlT[0],
-                                urlS[0] );
+                                urlS[0]);
                         viewModel.updateAccount(jsonUpdateCMND, new ConfirmAccountViewModel.UpdateAccountEvent() {
                             @Override
                             public void onUpdateSuccess() {
                                 //xác nhận thành công
-                                sharedUtils.setString(Common.KEY_FONT_CMND_ACC,urlT[0]);
-                                sharedUtils.setString(Common.KEY_BACK_CMND_ACC,urlS[0]);
+                                sharedUtils.setString(Common.KEY_FONT_CMND_ACC, urlT[0]);
+                                sharedUtils.setString(Common.KEY_BACK_CMND_ACC, urlS[0]);
                                 dialog.dismiss();
                                 alertDialog = Common.showDialogAlert(ConfirmAccountActivity.this,
                                         "Đã gửi yêu cầu xác nhận!",
@@ -124,7 +124,7 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-            data.getExtras().get("data");
+            if (data.getExtras().get("data") == null) return;
         } catch (Exception e) {
             e.printStackTrace();
             return;
