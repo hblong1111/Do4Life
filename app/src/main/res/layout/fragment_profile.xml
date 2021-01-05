@@ -36,7 +36,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:layout_marginLeft="185dp"
                 android:text="+ Thêm hồ sơ"
                 android:gravity="right"
                 android:textAlignment="gravity"
