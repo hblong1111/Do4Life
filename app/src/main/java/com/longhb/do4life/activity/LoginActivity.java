@@ -1,15 +1,18 @@
 package com.longhb.do4life.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Toast;
 
 import com.longhb.do4life.R;
+import com.longhb.do4life.base.BaseActivity;
 import com.longhb.do4life.databinding.ActivityLoginBinding;
 import com.longhb.do4life.model.retrofit.res.MyAccount;
 import com.longhb.do4life.model.ViewModelFactory;
@@ -22,7 +25,7 @@ import com.longhb.do4life.viewmodel.LoginViewModel;
 import static com.longhb.do4life.utils.Common.KEY_PREFS_PASSWORD;
 import static com.longhb.do4life.utils.Common.KEY_PREFS_USERNAME;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
     ActivityLoginBinding binding;
     LoginViewModel viewModel;
     private AlertDialog alertDialog;
@@ -43,10 +46,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         binding.tvQuenMatKhau.setOnClickListener(this);
         binding.tvSignIn.setOnClickListener(this);
 
+
+        checkText(binding.edtPass,binding.tipPass,"Mật khẩu không hợp lệ");
+        checkText(binding.edtPhone,binding.tipPhone,"Số điện thoại không đúng");
+
     }
 
     private void configRememberPassword() {
-          prefs = SharedUtils.getInstance(this);
+        prefs = SharedUtils.getInstance(this);
         String username = prefs.getString(KEY_PREFS_USERNAME, null);
         String password = prefs.getString(Common.KEY_PREFS_PASSWORD, null);
         if (username != null) {
@@ -65,13 +72,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 prefs.setString(KEY_PREFS_PASSWORD, null);
             }
         });
-    }
-
-    public void onClickLogin(View view) {
-        if (binding.edtPhone.toString().trim() == "" || binding.edtPass.toString().trim() == "") {
-            binding.txtAlert.setText("Bạn chưa nhập tài khoản hoặc mật khẩu");
-        } else {
-        }
     }
 
     @Override
@@ -101,9 +101,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void checkLogin() {
-
-        //TODO: check các dữ liệu người dùng nhập(không đúng yêu cầu return;)
-
+        if (binding.edtPass.getText().length() == 0||binding.edtPhone.getText().length() == 0) {
+            Toast.makeText(this, "Mời nhập tài khoản", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (binding.tipPass.isErrorEnabled()||binding.tipPhone.isErrorEnabled()){
+            Toast.makeText(this, "Có lỗi xảy ra.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Vui lòng đợi...");
         progressDialog.setTitle("Đang đăng nhập");
@@ -114,10 +119,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onLoginSuccess(MyAccount myAccount) {
                 progressDialog.dismiss();
-                prefs.setString(Common.KEY_ID_ACC,myAccount.id);
-                prefs.setString(Common.KEY_FONT_CMND_ACC,myAccount.fontCMND);
-                prefs.setString(Common.KEY_BACK_CMND_ACC,myAccount.backCMND);
-                prefs.setBoolean(Common.KEY_CHECKED_ACC,myAccount.checked);
+                prefs.setString(Common.KEY_ID_ACC, myAccount.id);
+                prefs.setString(Common.KEY_FONT_CMND_ACC, myAccount.fontCMND);
+                prefs.setString(Common.KEY_BACK_CMND_ACC, myAccount.backCMND);
+                prefs.setBoolean(Common.KEY_CHECKED_ACC, myAccount.checked);
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 finish();
             }
@@ -135,5 +140,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 alertDialog = builder.show();
             }
         });
+    }
+
+    @Override
+    protected boolean checkPass(int idEdt, String text) {
+        switch (idEdt) {
+            case R.id.edtPass:
+            if (text.length() >= 8) return true;
+            break;
+            case R.id.edtPhone:
+                int i =1;
+                try {
+                     i = Integer.parseInt(text.substring(0, 1));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if ((text.length()==10||text.length()==11)&&i==0) return true;
+                break;
+        }
+        return false;
     }
 }
