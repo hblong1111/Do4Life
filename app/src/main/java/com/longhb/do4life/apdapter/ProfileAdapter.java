@@ -32,7 +32,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.Recycler
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        holder.tvAge.setText(listPro.get(position).age + "");
+        holder.tvAge.setText(listPro.get(position).age + " tuổi");
         holder.tvName.setText(listPro.get(position).fullname);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

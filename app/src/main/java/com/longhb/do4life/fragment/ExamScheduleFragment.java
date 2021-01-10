@@ -61,6 +61,7 @@ public class ExamScheduleFragment extends Fragment implements ExamScheduleAdapte
 
         viewModel = new ViewModelProvider(getActivity(), new ViewModelFactory()).get(ExamScheduleFragmentViewModel.class);
 
+        viewModel.getListSchedule().postValue(new ArrayList<>());
         binding.spinnerProfile.setOnSpinnerItemSelectedListener((OnSpinnerItemSelectedListener<String>) (i, s, i1, t1) -> {
             dialog.show();
             binding.tvChonHoSo.setVisibility(View.GONE);
@@ -137,7 +138,7 @@ public class ExamScheduleFragment extends Fragment implements ExamScheduleAdapte
         binding.rcv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         viewModel.getListSchedule().observe(getActivity(), schedules -> {
-            if (schedules.size()==0){
+            if (schedules.size()==0&&binding.spinnerProfile.getSelectedIndex()>=0){
                 binding.tvNoItem.setVisibility(View.VISIBLE);
             }else {
                 binding.tvNoItem.setVisibility(View.GONE);

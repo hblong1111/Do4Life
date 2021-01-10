@@ -174,14 +174,14 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onSuccess() {
                     progressDialog.dismiss();
-                    Toast.makeText(ScheduleActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScheduleActivity.this, "Đặt lịch khám thành công.", Toast.LENGTH_SHORT).show();
                     onBackPressed();
                 }
 
                 @Override
                 public void onError() {
                     progressDialog.dismiss();
-                    Toast.makeText(ScheduleActivity.this, "Error!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScheduleActivity.this, "Có lỗi xảy ra, vui lòng thử lại.", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
