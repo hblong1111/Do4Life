@@ -55,7 +55,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, P
         binding.tvAddProfile.setOnClickListener(this);
 
         viewModel.getProfile(new JsonProfile(SharedUtils.getInstance(getContext()).getString(Common.KEY_ID_ACC, null)));
-        Log.d("hblong", "ProfileFragment | onCreateView: " + SharedUtils.getInstance(getContext()).getString(Common.KEY_ID_ACC, null));
+
 
         return binding.getRoot();
     }
@@ -71,7 +71,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, P
             list.clear();
             list.addAll(profileRetrofits);
             adapter.notifyDataSetChanged();
-            Log.d("hblong", "ProfileFragment | settingRCV: " + profileRetrofits.size());
         });
 
     }

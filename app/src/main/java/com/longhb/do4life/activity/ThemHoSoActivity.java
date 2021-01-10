@@ -25,6 +25,7 @@ public class ThemHoSoActivity extends AppCompatActivity implements View.OnClickL
         setContentView(binding.getRoot());
 
         binding.btnXacNhan.setOnClickListener(this);
+        binding.btnBack.setOnClickListener(this);
 
 
     }
@@ -42,6 +43,9 @@ public class ThemHoSoActivity extends AppCompatActivity implements View.OnClickL
                 returnIntent.putExtra(Common.CODE_PUT_PROFILE, (Serializable) profile);
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
+                break;
+            case R.id.btnBack:
+                onBackPressed();
                 break;
         }
     }

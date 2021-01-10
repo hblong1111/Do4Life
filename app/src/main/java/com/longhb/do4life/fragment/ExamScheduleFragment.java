@@ -2,6 +2,7 @@ package com.longhb.do4life.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.longhb.do4life.R;
+import com.longhb.do4life.activity.HomeActivity;
 import com.longhb.do4life.apdapter.ExamScheduleAdapter;
 import com.longhb.do4life.databinding.FragmentExamScheduleBinding;
 import com.longhb.do4life.model.Exam;
@@ -100,6 +103,28 @@ public class ExamScheduleFragment extends Fragment implements ExamScheduleAdapte
             }
         });
         settingRCV();
+
+
+        HomeActivity.drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+                binding.spinnerProfile.dismiss();
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
 
         return binding.getRoot();
     }

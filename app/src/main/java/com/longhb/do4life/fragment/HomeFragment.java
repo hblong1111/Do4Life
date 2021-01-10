@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.activity.ConfirmAccountActivity;
+import com.longhb.do4life.activity.HomeActivity;
 import com.longhb.do4life.activity.ScheduleActivity;
 import com.longhb.do4life.apdapter.PostAdapter;
 import com.longhb.do4life.databinding.FragmentHomeBinding;
@@ -42,8 +45,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     List<Post> postList;
     PostAdapter adapter;
 
-    SharedUtils sharedUtils;
-
+    SharedUtils sharedUtils; 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater);
@@ -55,6 +57,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         settingRCVPost();
 
         binding.btnDatLich.setOnClickListener(this);
+
 
 
         return binding.getRoot();
@@ -158,4 +161,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
 
     }
+
+
 }

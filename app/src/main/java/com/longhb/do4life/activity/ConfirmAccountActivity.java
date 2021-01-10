@@ -40,6 +40,7 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
         sharedUtils = SharedUtils.getInstance(ConfirmAccountActivity.this);
         binding.imageCMNDS.setOnClickListener(this);
         binding.imageCMNDT.setOnClickListener(this);
+        binding.tvBack.setOnClickListener(this);
         binding.btnSave.setOnClickListener(this);
     }
 
@@ -54,6 +55,9 @@ public class ConfirmAccountActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.btnSave:
                 updateAccount();
+                break;
+            case R.id.tvBack:
+                onBackPressed();
                 break;
         }
     }

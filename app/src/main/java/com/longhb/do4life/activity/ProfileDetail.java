@@ -30,6 +30,7 @@ public class ProfileDetail extends AppCompatActivity implements View.OnClickList
         binding.edtName.setText(profile.fullname);
 
         binding.btnUpdate.setOnClickListener(this);
+        binding.btnBack.setOnClickListener(this);
     }
 
     @Override
@@ -40,6 +41,9 @@ public class ProfileDetail extends AppCompatActivity implements View.OnClickList
                 Intent i = new Intent(this, UpdateProfileActivity.class);
                 i.putExtra(Common.CODE_PUT_PROFILE, profile);
                 startActivityForResult(i, CODE_UPDATE);
+                break;
+            case R.id.btnBack:
+                onBackPressed();
                 break;
         }
     }
