@@ -27,6 +27,18 @@ public class Common {
         return builder.show();
     }
 
+
+    public static AlertDialog showDialogAlert(Context context, String mess, String textBtnOk, String textBtn, DialogInterface.OnClickListener okEvent, DialogInterface.OnClickListener cancelEvent) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Thông Báo");
+        builder.setMessage(mess);
+        builder.setPositiveButton(textBtnOk, okEvent);
+        builder.setNegativeButton(textBtn, cancelEvent);
+        builder.create();
+        builder.setCancelable(false);
+        return builder.show();
+    }
+
     public static ProgressDialog buildDialogLoading(Context context, String title, CharSequence mess){
         ProgressDialog  dialog=new ProgressDialog(context);
         dialog.setTitle(title);

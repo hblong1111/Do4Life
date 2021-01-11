@@ -3,6 +3,9 @@ package com.longhb.do4life.model.retrofit.res;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Shift {
 
     @SerializedName("_id")
@@ -16,7 +19,7 @@ public class Shift {
     public String doctor;
     @SerializedName("time")
     @Expose
-    public String time;
+    public long time;
     @SerializedName("status")
     @Expose
     public boolean status;
@@ -34,5 +37,9 @@ public class Shift {
                 ", status='" + status + '\'' +
                 ", v=" + v +
                 '}';
+    }
+
+    public String getTime(SimpleDateFormat format){
+        return format.format(new Date(time));
     }
 }

@@ -24,6 +24,7 @@ import com.longhb.do4life.utils.SharedUtils;
 import com.longhb.do4life.viewmodel.ScheduleActivityViewModel;
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +35,11 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
 
     List<Department> departmentList;
 
-    List<Shift> shiftList, shiftListTrue;
+    List<Shift> shiftList, shiftListDate, shiftListTime;
     List<ProfileRetrofit> listProfile;
     private ProgressDialog progressDialog;
+
+    SimpleDateFormat formatDate, formatTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +52,22 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         departmentList = new ArrayList<>();
         shiftList = new ArrayList<>();
         listProfile = new ArrayList<>();
-        shiftListTrue = new ArrayList<>();
+        shiftListDate = new ArrayList<>();
+        shiftListTime = new ArrayList<>();
 
         progressDialog = Common.buildDialogLoading(ScheduleActivity.this, null, "Đang tải...");
 
+        formatTime = new SimpleDateFormat("hh:mm");
+        formatDate = new SimpleDateFormat("dd/MM/yyyy");
         settingSpinnerProfile();
 
 
-        settingSpinnerShift();
+        settingSpinnerShiftDate();
 
         binding.btnXacNhan.setOnClickListener(this);
         binding.btnBack.setOnClickListener(this);
         binding.btnHuy.setOnClickListener(this);
+
 
     }
 
@@ -91,21 +98,53 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
                 });
     }
 
-    private void settingSpinnerShift() {
+    private void settingSpinnerShiftDate() {
         viewModel.getLitShift().observe(this, shifts -> {
+            Log.d("hblong", "ScheduleActivity | settingSpinnerShift: " + shifts.toString());
+
+            binding.spinnerShift.clearSelectedItem();
+            shiftListTime.clear();
             shiftList.clear();
-            shiftListTrue.clear();
+            shiftListDate.clear();
             shiftList.addAll(shifts);
             List<String> strings = new ArrayList<>();
 
+            s:
             for (Shift shift : shiftList) {
                 if (!shift.status) continue;
-                shiftListTrue.add(shift);
-                strings.add(shift.time);
+                for (Shift shift1 : shiftListDate) {
+                    if (shift1.getTime(formatDate).equals(shift.getTime(formatDate))) {
+                        continue s;
+                    }
+                }
+                shiftListDate.add(shift);
+                strings.add(shift.getTime(formatDate));
             }
 
+            if (shiftListDate.size() == 0) {
+                Toast.makeText(this, "Không còn ngày khám nào.", Toast.LENGTH_SHORT).show();
+            }
+            binding.spinnerDate.setItems(strings);
+        });
+
+
+        binding.spinnerDate.setOnSpinnerItemSelectedListener((OnSpinnerItemSelectedListener<String>) (i, s, i1, t1) -> {
+            binding.spinnerShift.clearSelectedItem();
+            shiftListTime.clear();
+            List<String> strings=new ArrayList<>();
+            for (Shift shift:shiftList  ) {
+                if (shift.getTime(formatDate).equals(shiftListDate.get(binding.spinnerDate.getSelectedIndex()).getTime(formatDate))) {
+                    shiftListTime.add(shift);
+                    strings.add(shift.getTime(formatTime));
+                }
+            }
+
+            if (strings.size() == 0) {
+                Toast.makeText(this, "Không còn ca khám nào trống, vui lòng quay lại sau.", Toast.LENGTH_SHORT).show();
+            }
             binding.spinnerShift.setItems(strings);
         });
+
     }
 
     private void settingSpinnerDepartment() {
@@ -168,7 +207,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     private void addSchedule() {
         if (binding.spinnerProfile.getSelectedIndex() >= 0 && binding.spinnerDepartment.getSelectedIndex() >= 0 && binding.spinnerShift.getSelectedIndex() >= 0) {
             progressDialog.show();
-            Shift shift = shiftListTrue.get(binding.spinnerShift.getSelectedIndex());
+            Shift shift = shiftListDate.get(binding.spinnerShift.getSelectedIndex());
             ProfileRetrofit profileRetrofit = listProfile.get(binding.spinnerProfile.getSelectedIndex());
             viewModel.createSchedule(new JsonCreateSchedule(shift.id, profileRetrofit.id), new ScheduleActivityViewModel.EventCreateSchedule() {
                 @Override

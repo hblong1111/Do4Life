@@ -37,4 +37,5 @@
         android:name="com.longhb.do4life.fragment.NotificationFragment"
         android:label="@string/menu_notification"
         tools:layout="@layout/notification_fragment" />
+                                        
 </navigation>
