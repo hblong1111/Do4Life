@@ -19,7 +19,6 @@ public class JsonScheduleHistory {
      * @param profile
      */
     public JsonScheduleHistory(String profile) {
-        super();
         this.profile = profile;
     }
 

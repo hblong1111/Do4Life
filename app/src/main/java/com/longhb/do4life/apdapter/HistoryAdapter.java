@@ -1,27 +1,29 @@
 package com.longhb.do4life.apdapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.longhb.do4life.R;
-import com.longhb.do4life.model.HistoryExam;
+import com.longhb.do4life.model.retrofit.res.ScheduleHistory;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.RecyclerViewHolder> {
-    ArrayList<HistoryExam> historyList;
-    Context context;
+    List<ScheduleHistory> list;
 
-    public HistoryAdapter(ArrayList<HistoryExam> historyList, Context context) {
-        this.historyList = historyList;
-        this.context = context;
+    SimpleDateFormat format;
+
+    public HistoryAdapter(List<ScheduleHistory> historyList ) {
+        this.list = historyList;
+        format = new SimpleDateFormat("dd/MM/yyyy");
     }
 
     @NonNull
@@ -33,14 +35,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.Recycler
 
     @Override
     public void onBindViewHolder(@NonNull HistoryAdapter.RecyclerViewHolder holder, int position) {
-        holder.tv_STT_his.setText(historyList.get(position).STT_history);
-        holder.tv_Name_Exam.setText(historyList.get(position).name_Exam);
-        holder.tv_Day_Exam.setText(historyList.get(position).day_history);
+        holder.tv_STT_his.setText((position+1)+"");
+        holder.tv_Name_Exam.setText(list.get(position).fullname);
+        holder.tv_Day_Exam.setText(format.format(new Date(list.get(position).time)));
     }
 
     @Override
     public int getItemCount() {
-        return historyList.size();
+        return list.size();
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {

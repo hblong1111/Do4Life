@@ -28,7 +28,7 @@ public class ScheduleHistory {
     public String room;
     @SerializedName("time")
     @Expose
-    public Integer time;
+    public long time;
     @SerializedName("result")
     @Expose
     public String result;
