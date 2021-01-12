@@ -3,6 +3,7 @@ package com.longhb.do4life.network;
 import com.longhb.do4life.model.retrofit.json.JsonCreateSchedule;
 import com.longhb.do4life.model.retrofit.json.JsonProfile;
 import com.longhb.do4life.model.retrofit.json.JsonSchedule;
+import com.longhb.do4life.model.retrofit.json.JsonScheduleHistory;
 import com.longhb.do4life.model.retrofit.json.JsonShift;
 import com.longhb.do4life.model.retrofit.json.JsonUpdateCMND;
 import com.longhb.do4life.model.retrofit.res.Department;
@@ -11,6 +12,7 @@ import com.longhb.do4life.model.retrofit.res.Post;
 import com.longhb.do4life.model.retrofit.json.JsonAccount;
 import com.longhb.do4life.model.retrofit.res.ProfileRetrofit;
 import com.longhb.do4life.model.retrofit.res.Schedule;
+import com.longhb.do4life.model.retrofit.res.ScheduleHistory;
 import com.longhb.do4life.model.retrofit.res.Shift;
 
 import java.util.List;
@@ -66,4 +68,8 @@ public interface RetrofitService {
     //danh sách lịch khám
     @POST("/getScheduleByProfileId")
     Call<List<Schedule>> getScheduleByProfileId(@Body JsonSchedule jsonSchedule);
+
+    //danh sách lịch sử khám
+    @POST("/getScheduleHistoryByProfileId")
+    Call<List<ScheduleHistory>> getScheduleHistoryByProfileId(@Body JsonScheduleHistory jsonProfileID);
 }
