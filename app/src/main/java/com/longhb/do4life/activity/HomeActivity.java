@@ -1,68 +1,116 @@
 package com.longhb.do4life.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
-import android.os.Build;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
 import com.longhb.do4life.R;
-import com.longhb.do4life.utils.Common;
+import com.longhb.do4life.databinding.ActivityHomeBinding;
+import com.longhb.do4life.fragment.AboutFragment;
+import com.longhb.do4life.fragment.ExamScheduleFragment;
+import com.longhb.do4life.fragment.HistoryFragment;
+import com.longhb.do4life.fragment.HomeFragment;
+import com.longhb.do4life.fragment.ProfileFragment;
 
-import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-public class HomeActivity extends AppCompatActivity   {
+    ActivityHomeBinding binding;
 
-    private AppBarConfiguration mAppBarConfiguration;
     public static DrawerLayout drawer;
-    private AlertDialog alertDialog;
+
+    Fragment fragment;
+    private Dialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-          drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_profile, R.id.nav_scheduleExam,
-                R.id.nav_historyExam, R.id.nav_about, R.id.nav_policy, R.id.nav_logout)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
+        drawer = binding.drawerLayout;
 
+        fragment = new HomeFragment();
 
+        getSupportFragmentManager().beginTransaction().add(R.id.frame, fragment).commit();
+
+        binding.navView.setNavigationItemSelectedListener(this);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.nav_logout) {
+            showDialogLogOut();
+            return false;
+        } else {
+            switch (item.getItemId()) {
+                case R.id.nav_home:
+                    fragment = new HomeFragment();
+                    break;
+                case R.id.nav_profile:
+                    fragment = new ProfileFragment();
+                    break;
+                case R.id.nav_scheduleExam:
+                    fragment = new ExamScheduleFragment();
+                    break;
+                case R.id.nav_historyExam:
+                    fragment = new HistoryFragment();
+                    break;
+                case R.id.nav_about:
+                    fragment = new AboutFragment();
+                    break;
+            }
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
+            binding.drawerLayout.closeDrawer(binding.navView);
+        }
         return true;
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+    private void showDialogLogOut() {
 
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+
+
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_log_out, null, false);
+        Button btnCancel;
+        Button btnOk;
+        btnCancel = view.findViewById(R.id.btnCancel);
+        btnOk = view.findViewById(R.id.btnOk);
+
+        btnCancel.setOnClickListener(v -> alertDialog.dismiss());
+        btnOk.setOnClickListener(v -> {
+            alertDialog.dismiss();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        });
+
+        alertDialog = new Dialog(this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(view);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(alertDialog.getWindow().getAttributes());
+        lp.width = (int) (0.9f * width);
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        alertDialog.show();
+        alertDialog.getWindow().setAttributes(lp);
     }
 }
