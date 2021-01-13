@@ -113,6 +113,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
             for (Shift shift : shiftList) {
                 if (!shift.status) continue;
                 for (Shift shift1 : shiftListDate) {
+                    Log.d("hblong", "ScheduleActivity | settingSpinnerShiftDate: " +shift1.getTime(formatDate)+"|"+ shift.getTime(formatDate));
                     if (shift1.getTime(formatDate).equals(shift.getTime(formatDate))) {
                         continue s;
                     }
