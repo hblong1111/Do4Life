@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+    xmlns:android="http://schemas.android.com/apk/res/android" />
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.AboutFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".fragment.AboutFragment">
 
     <ImageView
         android:id="@+id/imageView9"
@@ -18,30 +19,24 @@
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="match_parent"
-        android:layout_marginTop="-50dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
         android:src="@drawable/logo_splash"
         tools:ignore="MissingConstraints" />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="     Tiền thân là Viện Y học lâm sàng các bệnh Nhiệt đới,
-qua 13 năm phát triển, Bệnh viện Bệnh Nhiệt đới trung
-ương đã lớn mạnh cả về lượng và chất. Từ 1 tòa nhà
-120 giường bệnh ban đầu đến nay Bệnh viện đã phát
-triển thành 2 cơ sở (tại 78 Giải Phóng, Hà Nội và tại
-Thôn Bầu xã Kim Chung, huyện Đông Anh, Hà Nội)
-Năm 2014 cơ sở Kim Chung bắt đầu được đưa vào
-hoạt động. Ngày 26/06/2018, Bộ Y tế đã ra chính thức
- cấp giấy phép hoạt động khám chứa bệnh đa khoa
-cho cơ sở Kim Chung. Hiện nay, với 25 Khoa phòng và
-01 Viện Đào tạo bệnh truyền nhiễm và Nhiệt đới, bệnh
-viện là cơ sở khám bệnh, chữa bệnh đa khoa "
-        android:textColor="#000000"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
 
-        android:lineHeight="27dp"
-        android:textSize="20dp"
-        tools:ignore="MissingConstraints" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:lineHeight="27dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/about_pk"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            tools:ignore="MissingConstraints" />
+    </ScrollView>
 </LinearLayout>
