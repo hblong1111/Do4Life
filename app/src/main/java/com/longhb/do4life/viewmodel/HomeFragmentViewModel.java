@@ -24,6 +24,25 @@ public class HomeFragmentViewModel extends ViewModel {
     public HomeFragmentViewModel() {
     }
 
+    public void getAccountById(String idAcc,EventGetAcc event) {
+        RetrofitModule.getInstance().getAccountById(new JsonAccount(idAcc)).enqueue(new Callback<MyAccount>() {
+            @Override
+            public void onResponse(Call<MyAccount> call, Response<MyAccount> response) {
+                if (response.isSuccessful()) {
+                    event.onSuccess(response.body());
+                    return;
+                }
+                event.onError();
+            }
+
+            @Override
+            public void onFailure(Call<MyAccount> call, Throwable t) {
+                t.printStackTrace();
+                event.onError();
+            }
+        });
+    }
+
     public void getAllPost(EventGetAllPost event) {
         RetrofitModule.getInstance().getAllPost().enqueue(new Callback<List<Post>>() {
             @Override
@@ -63,6 +82,11 @@ public class HomeFragmentViewModel extends ViewModel {
         });
     }
 
+    public interface EventGetAcc {
+        void onSuccess(MyAccount account);
+
+        void onError();
+    }
 
     public interface EventGetAllPost {
         void getAllPostError();

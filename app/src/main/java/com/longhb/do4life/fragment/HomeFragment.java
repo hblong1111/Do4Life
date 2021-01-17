@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,13 +22,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.activity.ConfirmAccountActivity;
-import com.longhb.do4life.activity.HomeActivity;
 import com.longhb.do4life.activity.ScheduleActivity;
 import com.longhb.do4life.apdapter.PostAdapter;
 import com.longhb.do4life.databinding.FragmentHomeBinding;
-import com.longhb.do4life.model.retrofit.res.Post;
 import com.longhb.do4life.model.ViewModelFactory;
-import com.longhb.do4life.model.retrofit.json.JsonAccount;
+import com.longhb.do4life.model.retrofit.res.MyAccount;
+import com.longhb.do4life.model.retrofit.res.Post;
 import com.longhb.do4life.utils.Common;
 import com.longhb.do4life.utils.SharedUtils;
 import com.longhb.do4life.viewmodel.HomeFragmentViewModel;
@@ -45,7 +42,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     List<Post> postList;
     PostAdapter adapter;
 
-    SharedUtils sharedUtils; 
+    SharedUtils sharedUtils;
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater);
@@ -57,7 +55,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         settingRCVPost();
 
         binding.btnDatLich.setOnClickListener(this);
-
 
 
         return binding.getRoot();
@@ -100,9 +97,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void datLich() {
         boolean isChecked = sharedUtils.getBoolean(Common.KEY_CHECKED_ACC, false);
-        String fontCMND = sharedUtils.getString(Common.KEY_FONT_CMND_ACC, null);
+        String idAcc = sharedUtils.getString(Common.KEY_ID_ACC, null);
+      /*  String fontCMND = sharedUtils.getString(Common.KEY_FONT_CMND_ACC, null);
         String backCMND = sharedUtils.getString(Common.KEY_BACK_CMND_ACC, null);
         String idAcc = sharedUtils.getString(Common.KEY_ID_ACC, null);
+
         if (fontCMND == null || backCMND == null) {
             showDialogConfirm();
         } else if (!isChecked) {
@@ -123,6 +122,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             });
         } else {
             startActivity(new Intent(getContext(), ScheduleActivity.class));
+        }*/
+
+        if (isChecked) {
+            startActivity(new Intent(getContext(), ScheduleActivity.class));
+        } else {
+            viewModel.getAccountById(idAcc, new HomeFragmentViewModel.EventGetAcc() {
+                @Override
+                public void onSuccess(MyAccount account) {
+
+                    if (account.checked) {
+                        startActivity(new Intent(getContext(), ScheduleActivity.class));
+                    } else {
+                        if (account.backCMND.equals("") || account.backCMND == null) {
+                            showDialogConfirm();
+                        } else {
+                            showDialogAlert();
+                        }
+                    }
+                }
+
+                @Override
+                public void onError() {
+                    Toast.makeText(getContext(), "Có lỗi xảy ra, vui lòng thử lại.", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
     }
