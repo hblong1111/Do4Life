@@ -1,5 +1,7 @@
 package com.longhb.do4life.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -54,7 +56,6 @@ public class HistoryFragmentViewModel extends ViewModel {
         retrofit.getScheduleHistoryByProfileId(jsonScheduleHistory).enqueue(new Callback<List<ScheduleHistory>>() {
             @Override
             public void onResponse(Call<List<ScheduleHistory>> call, Response<List<ScheduleHistory>> response) {
-
                 if (response.isSuccessful()) {
                     list.postValue(response.body());
                     if (response.body().size() == 0) {

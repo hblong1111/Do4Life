@@ -1,7 +1,5 @@
 package com.longhb.do4life.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.longhb.do4life.R;
+import com.longhb.do4life.base.BaseActivity;
 import com.longhb.do4life.databinding.ActivityUpdateProfileBinding;
 import com.longhb.do4life.model.retrofit.json.JsonProfile;
 import com.longhb.do4life.model.retrofit.res.ProfileRetrofit;
@@ -20,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UpdateProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class UpdateProfileActivity extends BaseActivity implements View.OnClickListener {
     ActivityUpdateProfileBinding binding;
     private ProfileRetrofit profile;
 
@@ -41,6 +40,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         binding.btnHuy.setOnClickListener(this);
         binding.btnBack.setOnClickListener(this);
         binding.btnXacNhan.setOnClickListener(this);
+
+        checkText(binding.edtPhone, binding.tipPhone, "Số điện thoại không đúng");
     }
 
     @Override
@@ -51,14 +52,33 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                 onBackPressed();
                 break;
             case R.id.btnXacNhan:
+                String name = binding.edtName.getText().toString();
+                String numberPhone = binding.edtPhone.getText().toString();
+                String ageString = binding.edtNamSinh.getText().toString();
+
+                //kiểm tra điều kiện nhập
+
+                if (numberPhone.length() == 0 || name.length() == 0 || ageString.length() == 0) {
+                    Toast.makeText(this, "Nhập đủ thông tin.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (binding.tipName.isErrorEnabled() || binding.tipPhone.isErrorEnabled() || binding.tipNamSinh.isErrorEnabled()) {
+                    Toast.makeText(this, "Lỗi nhập sai dữ liệu.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                int age = Integer.parseInt(ageString);
+
                 ProgressDialog progressDialog = Common.buildDialogLoading(this, null, "Đang tải...");
                 profile.fullname = binding.edtName.getText().toString();
-                profile.age = Integer.valueOf(binding.edtNamSinh.getText().toString());
+                profile.age = age;
                 profile.phoneNumber = binding.edtPhone.getText().toString();
+
+
                 RetrofitModule.getInstance().updateProfile(new JsonProfile(profile.id, profile.age, profile.fullname, profile.phoneNumber)).enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        if (!response.body())return;
+                        if (!response.body()) return;
                         Intent returnIntent = new Intent();
                         returnIntent.putExtra(Common.CODE_PUT_PROFILE, profile);
                         setResult(Activity.RESULT_OK, returnIntent);
@@ -74,5 +94,24 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                 });
 
         }
+    }
+
+    @Override
+    protected boolean checkPass(int idEdt, String text) {
+        switch (idEdt) {
+            case R.id.edtPass:
+                if (text.length() >= 8) return true;
+                break;
+            case R.id.edtPhone:
+                int i = 1;
+                try {
+                    i = Integer.parseInt(text.substring(0, 1));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if ((text.length() == 10 || text.length() == 11) && i == 0) return true;
+                break;
+        }
+        return false;
     }
 }
