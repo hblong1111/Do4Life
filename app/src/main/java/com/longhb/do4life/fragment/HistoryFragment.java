@@ -40,17 +40,11 @@ import java.util.List;
 
 public class HistoryFragment extends Fragment implements HistoryFragmentViewModel.Event {
     HistoryFragmentBinding binding;
-
     HistoryFragmentViewModel viewModel;
-
     private ProgressDialog dialog;
-
     HistoryAdapter adapter;
-
     AlertDialog alertDialog;
-
     List<ScheduleHistory> list;
-
     List<String> stringListIDProfile;
 
     @Override

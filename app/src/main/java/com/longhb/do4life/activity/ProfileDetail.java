@@ -37,7 +37,6 @@ public class ProfileDetail extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnUpdate:
-
                 Intent i = new Intent(this, UpdateProfileActivity.class);
                 i.putExtra(Common.CODE_PUT_PROFILE, profile);
                 startActivityForResult(i, CODE_UPDATE);
@@ -63,6 +62,7 @@ public class ProfileDetail extends AppCompatActivity implements View.OnClickList
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
             }
+            
         }
     }//
 }
