@@ -1,22 +1,20 @@
 package com.longhb.do4life.activity;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.lifecycle.ViewModelProvider;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.base.BaseActivity;
 import com.longhb.do4life.databinding.ActivityLoginBinding;
-import com.longhb.do4life.model.retrofit.res.MyAccount;
 import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.model.retrofit.json.JsonAccount;
+import com.longhb.do4life.model.retrofit.res.MyAccount;
 import com.longhb.do4life.utils.CheckLoginEvent;
 import com.longhb.do4life.utils.Common;
 import com.longhb.do4life.utils.SharedUtils;
@@ -38,7 +36,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         setContentView(binding.getRoot());
 
         viewModel = new ViewModelProvider(this, new ViewModelFactory()).get(LoginViewModel.class);
-
 
         configRememberPassword();
 

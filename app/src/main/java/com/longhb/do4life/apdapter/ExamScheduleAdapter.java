@@ -1,30 +1,30 @@
 package com.longhb.do4life.apdapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.longhb.do4life.R;
-import com.longhb.do4life.model.Exam;
 import com.longhb.do4life.model.retrofit.res.Schedule;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ExamScheduleAdapter extends RecyclerView.Adapter<ExamScheduleAdapter.RecyclerViewHolder> {
     List<Schedule> schedules;
 
     Event callback;
+    SimpleDateFormat format;
 
     public ExamScheduleAdapter(List<Schedule> schedules, Event callback) {
         this.schedules = schedules;
         this.callback = callback;
+        format = new SimpleDateFormat("dd/MM/yyy");
     }
 
     @NonNull
@@ -38,7 +38,7 @@ public class ExamScheduleAdapter extends RecyclerView.Adapter<ExamScheduleAdapte
     public void onBindViewHolder(@NonNull ExamScheduleAdapter.RecyclerViewHolder holder, int position) {
         holder.tv_stt.setText((position + 1) + "");
         holder.tv_Name_exam.setText(schedules.get(position).profileName);
-        holder.tv_day.setText(schedules.get(position).time);
+        holder.tv_day.setText(format.format(new Date(schedules.get(position).time)));
 
         holder.itemView.setOnClickListener(v -> callback.onClickItem(position));
     }

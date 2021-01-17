@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.longhb.do4life.R;
+import com.longhb.do4life.broadcast.AlarmBroadcast;
 import com.longhb.do4life.databinding.ActivityDatLichBinding;
 import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.model.retrofit.json.JsonCreateSchedule;
@@ -113,7 +114,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
             for (Shift shift : shiftList) {
                 if (!shift.status) continue;
                 for (Shift shift1 : shiftListDate) {
-                    Log.d("hblong", "ScheduleActivity | settingSpinnerShiftDate: " +shift1.getTime(formatDate)+"|"+ shift.getTime(formatDate));
+                    Log.d("hblong", "ScheduleActivity | settingSpinnerShiftDate: " + shift1.getTime(formatDate) + "|" + shift.getTime(formatDate));
                     if (shift1.getTime(formatDate).equals(shift.getTime(formatDate))) {
                         continue s;
                     }
@@ -132,8 +133,8 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         binding.spinnerDate.setOnSpinnerItemSelectedListener((OnSpinnerItemSelectedListener<String>) (i, s, i1, t1) -> {
             binding.spinnerShift.clearSelectedItem();
             shiftListTime.clear();
-            List<String> strings=new ArrayList<>();
-            for (Shift shift:shiftList  ) {
+            List<String> strings = new ArrayList<>();
+            for (Shift shift : shiftList) {
                 if (shift.getTime(formatDate).equals(shiftListDate.get(binding.spinnerDate.getSelectedIndex()).getTime(formatDate))) {
                     shiftListTime.add(shift);
                     strings.add(shift.getTime(formatTime));
@@ -214,6 +215,9 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onSuccess() {
                     progressDialog.dismiss();
+                    //TODO: set notification
+                    new AlarmBroadcast().setAlarm(ScheduleActivity.this);
+
                     Toast.makeText(ScheduleActivity.this, "Đặt lịch khám thành công.", Toast.LENGTH_SHORT).show();
                     onBackPressed();
                 }

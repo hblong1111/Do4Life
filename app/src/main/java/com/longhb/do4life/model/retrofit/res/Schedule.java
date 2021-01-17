@@ -18,7 +18,7 @@ public class Schedule {
     public String room;
     @SerializedName("time")
     @Expose
-    public String time;
+    public long time;
     @SerializedName("profileName")
     @Expose
     public String profileName;
