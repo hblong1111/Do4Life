@@ -40,7 +40,7 @@ public class ExamScheduleAdapter extends RecyclerView.Adapter<ExamScheduleAdapte
         holder.tv_Name_exam.setText(schedules.get(position).profileName);
         holder.tv_day.setText(format.format(new Date(schedules.get(position).time)));
 
-        holder.itemView.setOnClickListener(v -> callback.onClickItem(position));
+        holder.itemView.setOnClickListener(v -> callback.onClickItem(schedules.get(position)));
     }
 
     @Override
@@ -60,6 +60,6 @@ public class ExamScheduleAdapter extends RecyclerView.Adapter<ExamScheduleAdapte
     }
 
     public interface Event {
-        void onClickItem(int pos);
+        void onClickItem(Schedule item);
     }
 }

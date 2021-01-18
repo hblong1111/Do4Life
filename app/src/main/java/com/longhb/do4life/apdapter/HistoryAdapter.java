@@ -12,7 +12,6 @@ import com.longhb.do4life.R;
 import com.longhb.do4life.model.retrofit.res.ScheduleHistory;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,9 +19,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.Recycler
     List<ScheduleHistory> list;
 
     SimpleDateFormat format;
-
-    public HistoryAdapter(List<ScheduleHistory> historyList ) {
+    private Event event;
+    public HistoryAdapter(List<ScheduleHistory> historyList, Event event) {
         this.list = historyList;
+        this.event = event;
         format = new SimpleDateFormat("dd/MM/yyyy");
     }
 
@@ -38,6 +38,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.Recycler
         holder.tv_STT_his.setText((position+1)+"");
         holder.tv_Name_Exam.setText(list.get(position).fullname);
         holder.tv_Day_Exam.setText(format.format(new Date(list.get(position).time)));
+
+        holder.itemView.setOnClickListener(v -> event.clickItem(list.get(position)));
     }
 
     @Override
@@ -54,4 +56,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.Recycler
             tv_Day_Exam=itemView.findViewById(R.id.tv_day_history);
         }
     }
+
+    public interface Event {
+        void clickItem(ScheduleHistory item);
+    }
+
 }

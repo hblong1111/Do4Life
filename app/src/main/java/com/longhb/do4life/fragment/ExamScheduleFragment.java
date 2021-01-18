@@ -1,13 +1,16 @@
 package com.longhb.do4life.fragment;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,26 +19,24 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.longhb.do4life.R;
 import com.longhb.do4life.activity.HomeActivity;
 import com.longhb.do4life.apdapter.ExamScheduleAdapter;
 import com.longhb.do4life.databinding.FragmentExamScheduleBinding;
-import com.longhb.do4life.model.Exam;
 import com.longhb.do4life.model.ViewModelFactory;
 import com.longhb.do4life.model.retrofit.json.JsonProfile;
 import com.longhb.do4life.model.retrofit.json.JsonSchedule;
 import com.longhb.do4life.model.retrofit.res.ProfileRetrofit;
 import com.longhb.do4life.model.retrofit.res.Schedule;
+import com.longhb.do4life.model.retrofit.res.ScheduleHistory;
 import com.longhb.do4life.utils.Common;
 import com.longhb.do4life.utils.SharedUtils;
 import com.longhb.do4life.viewmodel.ExamScheduleFragmentViewModel;
 import com.longhb.do4life.viewmodel.ScheduleActivityViewModel;
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 
-import org.jetbrains.annotations.Nullable;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class ExamScheduleFragment extends Fragment implements ExamScheduleAdapte
     List<Schedule> list;
     List<ProfileRetrofit> listProfile;
     private ProgressDialog dialog;
+    private Dialog alertDialog1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -152,7 +154,55 @@ public class ExamScheduleFragment extends Fragment implements ExamScheduleAdapte
     }
 
     @Override
-    public void onClickItem(int pos) {
+    public void onClickItem(Schedule item) {
+showDialogColor(item);
+    }
 
+
+    private void showDialogColor(Schedule item) {
+        int width = getResources().getDisplayMetrics().widthPixels;
+
+
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_schedule, null, false);
+        TextView tvBenhNhan;
+        TextView tvAge;
+        TextView tvPhone;
+        TextView tvKhoaKham;
+        TextView tvBacSi;
+        TextView tvPhong;
+        TextView tvTime;
+        Button btnDong;
+
+        tvBenhNhan = view.findViewById(R.id.tvBenhNhan);
+        tvAge = view.findViewById(R.id.tvAge);
+        tvPhone = view.findViewById(R.id.tvPhone);
+        tvKhoaKham = view.findViewById(R.id.tvKhoaKham);
+        tvBacSi = view.findViewById(R.id.tvBacSi);
+        tvPhong = view.findViewById(R.id.tvPhong);
+        tvTime = view.findViewById(R.id.tvTime);
+        btnDong = view.findViewById(R.id.btnDong);
+
+        tvAge.setText(item.profileAge + " tuổi");
+        tvBacSi.setText(item.doctor);
+        tvBenhNhan.setText(item.profileName);
+        tvKhoaKham.setText(item.department);
+        tvPhone.setText(item.phoneNumber);
+        tvPhong.setText(item.room);
+        tvTime.setText(new SimpleDateFormat("hh:mm dd/MM/yyyy").format(item.time));
+
+        btnDong.setOnClickListener(v -> alertDialog1.dismiss());
+
+        alertDialog1 = new Dialog(getContext());
+        alertDialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog1.setContentView(view);
+        alertDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(alertDialog1.getWindow().getAttributes());
+        lp.width = (int) (0.9f * width);
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        alertDialog1.show();
+        alertDialog1.getWindow().setAttributes(lp);
     }
 }

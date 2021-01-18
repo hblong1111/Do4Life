@@ -134,7 +134,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if (account.checked) {
                         startActivity(new Intent(getContext(), ScheduleActivity.class));
                     } else {
-                        if (account.backCMND.equals("") || account.backCMND == null) {
+                        if (account.backCMND == null||account.backCMND.equals("")) {
                             showDialogConfirm();
                         } else {
                             showDialogAlert();

@@ -2,6 +2,7 @@ package com.longhb.do4life.viewmodel;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -20,6 +21,7 @@ import retrofit2.Response;
 
 public class HomeFragmentViewModel extends ViewModel {
     public MutableLiveData<List<Post>> listPost = new MutableLiveData<>();
+    private String TAG="longhb";
 
     public HomeFragmentViewModel() {
     }
@@ -28,6 +30,7 @@ public class HomeFragmentViewModel extends ViewModel {
         RetrofitModule.getInstance().getAccountById(new JsonAccount(idAcc)).enqueue(new Callback<MyAccount>() {
             @Override
             public void onResponse(Call<MyAccount> call, Response<MyAccount> response) {
+                Log.d("longhb", "onResponse: ");
                 if (response.isSuccessful()) {
                     event.onSuccess(response.body());
                     return;
@@ -38,6 +41,7 @@ public class HomeFragmentViewModel extends ViewModel {
             @Override
             public void onFailure(Call<MyAccount> call, Throwable t) {
                 t.printStackTrace();
+                Log.e(TAG, "onFailure: ",t);
                 event.onError();
             }
         });
