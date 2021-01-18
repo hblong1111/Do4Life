@@ -65,6 +65,10 @@ public class ScheduleActivityViewModel extends ViewModel {
             @Override
             public void onResponse(Call<List<Shift>> call, Response<List<Shift>> response) {
                 if (response.isSuccessful() && response.body().size() > 0) {
+                    for (int i = 0; i < response.body().size(); i++) {
+
+                        Log.d("longhbb", "onResponse: "+response.body().get(i).toString());
+                    }
                     litShift.postValue(response.body());
                     callback.onSuccess();
                     return;

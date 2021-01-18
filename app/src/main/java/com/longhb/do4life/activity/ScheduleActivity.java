@@ -136,8 +136,10 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
             List<String> strings = new ArrayList<>();
             for (Shift shift : shiftList) {
                 if (shift.getTime(formatDate).equals(shiftListDate.get(binding.spinnerDate.getSelectedIndex()).getTime(formatDate))) {
-                    shiftListTime.add(shift);
-                    strings.add(shift.getTime(formatTime));
+                    if (shift.status) {
+                        shiftListTime.add(shift);
+                        strings.add(shift.getTime(formatTime));
+                    }
                 }
             }
 
